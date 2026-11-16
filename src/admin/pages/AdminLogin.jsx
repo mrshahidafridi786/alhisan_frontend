@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
-import { Lock, Mail, Eye, EyeOff, ShieldCheck, ArrowRight, AlertCircle } from 'lucide-react';
+import { Lock, Mail, Eye, EyeOff, ArrowRight, AlertCircle } from 'lucide-react';
 import { useAdminAuth } from '../../context/AdminAuthContext';
 import { ThemeToggle } from '../../components/common/ThemeToggle';
 
@@ -29,11 +29,6 @@ export const AdminLogin = () => {
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleQuickFill = () => {
-    setEmail('marwanafridi098@gmail.com');
-    setPassword('Alhisanwebsite@1122');
   };
 
   return (
@@ -135,18 +130,6 @@ export const AdminLogin = () => {
               )}
             </button>
           </form>
-
-          {/* Quick Credential Pre-fill helper */}
-          <div className="mt-6 pt-5 border-t border-navy-800 text-center">
-            <button
-              type="button"
-              onClick={handleQuickFill}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-navy-800/80 hover:bg-navy-800 border border-navy-700 text-xs text-gold-400 hover:text-gold-300 transition-colors"
-            >
-              <ShieldCheck className="w-3.5 h-3.5 text-gold-400" />
-              <span>Quick-Fill Administrator Account</span>
-            </button>
-          </div>
         </div>
 
         {/* Back to public site */}
