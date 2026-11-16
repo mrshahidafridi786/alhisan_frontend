@@ -2,7 +2,11 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const AdminAuthContext = createContext(null);
 
-const API_BASE = import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://localhost:5000/api' : '/api');
+const API_BASE =
+  import.meta.env.VITE_API_URL ||
+  (import.meta.env.DEV
+    ? 'http://localhost:5000/api'
+    : 'https://alhisan-backend-yblm.vercel.app/api');
 
 export const AdminAuthProvider = ({ children }) => {
   const [token, setToken] = useState(() => localStorage.getItem('alhisan_admin_token') || null);

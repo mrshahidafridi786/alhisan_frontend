@@ -8,6 +8,7 @@ dist/
 .env
 .env.*
 !.env.example
+!.env.production
 
 # OS & Editor files
 .DS_Store
