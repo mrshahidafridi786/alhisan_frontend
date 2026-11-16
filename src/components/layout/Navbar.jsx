@@ -46,11 +46,12 @@ export const Navbar = ({ onOpenQuoteModal }) => {
 
   return (
     <header
-      className={`sticky top-0 z-40 w-full transition-all duration-300 ${
+      className={`sticky top-0 z-50 w-full transition-all duration-300 backdrop-blur-md ${
         isScrolled
           ? 'glass-nav shadow-subtle border-b border-surface-border dark:border-navy-700/80 py-3'
           : 'bg-surface-warm/95 dark:bg-navy-900/95 border-b border-surface-border/60 dark:border-navy-800/80 py-4'
       }`}
+      style={{ position: 'sticky', top: 0, zIndex: 50 }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between gap-6">
