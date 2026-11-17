@@ -7,8 +7,8 @@
  */
 
 export const siteConfig = {
-  name: 'AL HISAN AL ASWAD GENERAL TRADING',
-  legalName: 'AL HISAN AL ASWAD GENERAL TRADING',
+  name: 'AL HISAN AL ASWA GENERAL TRADING',
+  legalName: 'AL HISAN AL ASWA GENERAL TRADING',
   businessType: 'General Trading Company',
   website: 'https://alhisanaue.com',
   location: {
@@ -60,11 +60,11 @@ export const siteConfig = {
   logo: {
     isPlaceholder: false,
     imageUrl: '/assets/logo.jpg',
-    altText: 'AL HISAN AL ASWAD GENERAL TRADING Logo — Abu Dhabi, UAE',
+    altText: 'AL HISAN AL ASWA GENERAL TRADING Logo — Abu Dhabi, UAE',
     brandText: 'ALHISAN',
-    subText: 'AL ASWAD GENERAL TRADING • ABU DHABI',
+    subText: 'AL ASWA GENERAL TRADING • ABU DHABI',
   },
-  copyright: '© 2026 AL HISAN AL ASWAD GENERAL TRADING. All Rights Reserved.',
+  copyright: '© 2026 AL HISAN AL ASWA GENERAL TRADING. All Rights Reserved.',
   navigation: [
     { label: 'Home', path: '/' },
     { label: 'About Us', path: '/about' },

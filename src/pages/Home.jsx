@@ -14,8 +14,8 @@ export const Home = () => {
   return (
     <>
       <SEO
-        title="AL HISAN AL ASWAD GENERAL TRADING | General Trading & Commercial Supply UAE"
-        description="AL HISAN AL ASWAD GENERAL TRADING — Trusted general trading, sourcing, and commercial supply partner in the UAE. Visit alhisanaue.com for products, inquiries, and business services."
+        title="AL HISAN AL ASWA GENERAL TRADING | General Trading & Commercial Supply UAE"
+        description="AL HISAN AL ASWA GENERAL TRADING — Trusted general trading, sourcing, and commercial supply partner in the UAE. Visit alhisanaue.com for products, inquiries, and business services."
         canonical="/"
       />
 

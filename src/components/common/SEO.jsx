@@ -13,7 +13,7 @@ export const SEO = ({
     : `${siteConfig.legalName} | General Trading & Commercial Supply UAE`;
 
   const metaDescription = description || 
-    'AL HISAN AL ASWAD GENERAL TRADING — Trusted general trading, sourcing, and commercial supply partner in the UAE. Visit alhisanaue.com for products, inquiries, and business services.';
+    'AL HISAN AL ASWA GENERAL TRADING — Trusted general trading, sourcing, and commercial supply partner in the UAE. Visit alhisanaue.com for products, inquiries, and business services.';
 
   const canonicalUrl = canonical ? `https://alhisanaue.com${canonical}` : 'https://alhisanaue.com/';
 
