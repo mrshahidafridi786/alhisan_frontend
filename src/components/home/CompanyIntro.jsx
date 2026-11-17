@@ -30,7 +30,7 @@ export const CompanyIntro = () => {
                     Abu Dhabi Headquarters
                   </span>
                   <p className="font-heading text-sm font-bold mt-0.5 text-slate-100">
-                    Al Hisan Al Aswad General Trading
+                    Al Hisan Al Aswa General Trading
                   </p>
                 </div>
               </div>

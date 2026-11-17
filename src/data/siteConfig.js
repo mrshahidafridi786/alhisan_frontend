@@ -60,9 +60,9 @@ export const siteConfig = {
   logo: {
     isPlaceholder: false,
     imageUrl: '/assets/logo.jpg',
-    altText: 'Al Hisan Al Aswad General Trading Logo — Abu Dhabi, UAE',
+    altText: 'Al Hisan Al Aswa General Trading Logo — Abu Dhabi, UAE',
     brandText: 'ALHISAN',
-    subText: 'AL ASWAD GENERAL TRADING • ABU DHABI',
+    subText: 'AL ASWA GENERAL TRADING • ABU DHABI',
   },
   copyright: '© 2026 Alhisan General Trading Company. All Rights Reserved.',
   navigation: [
