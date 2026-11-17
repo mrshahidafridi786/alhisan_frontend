@@ -14,8 +14,8 @@ export const Home = () => {
   return (
     <>
       <SEO
-        title="Alhisan Trading Company | Connecting Global Markets"
-        description="Alhisan is an international trading company based in Abu Dhabi, UAE, dealing in essential industrial commodities, food products, spices, salt, soda ash, and calcium carbonate."
+        title="AL HISAN AL ASWAD GENERAL TRADING | General Trading & Commercial Supply UAE"
+        description="AL HISAN AL ASWAD GENERAL TRADING — Trusted general trading, sourcing, and commercial supply partner in the UAE. Visit alhisanaue.com for products, inquiries, and business services."
         canonical="/"
       />
 

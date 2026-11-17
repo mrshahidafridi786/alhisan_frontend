@@ -6,16 +6,16 @@ export const SEO = ({
   description,
   canonical,
   ogType = 'website',
-  ogImage = 'https://alhisan.com/og-image.jpg',
+  ogImage = 'https://alhisanaue.com/assets/logo.jpg',
 }) => {
   const fullTitle = title 
     ? `${title} | ${siteConfig.legalName} — Abu Dhabi` 
-    : `${siteConfig.legalName} | International General Trading — Abu Dhabi, UAE`;
+    : `${siteConfig.legalName} | General Trading & Commercial Supply UAE`;
 
   const metaDescription = description || 
-    'Alhisan General Trading Company is an international trading enterprise based in Abu Dhabi, UAE, dealing in essential industrial commodities, food products, spices, salt, soda ash, and calcium carbonate.';
+    'AL HISAN AL ASWAD GENERAL TRADING — Trusted general trading, sourcing, and commercial supply partner in the UAE. Visit alhisanaue.com for products, inquiries, and business services.';
 
-  const canonicalUrl = canonical ? `https://alhisan.com${canonical}` : 'https://alhisan.com';
+  const canonicalUrl = canonical ? `https://alhisanaue.com${canonical}` : 'https://alhisanaue.com/';
 
   useEffect(() => {
     // Update document title
@@ -34,11 +34,14 @@ export const SEO = ({
     };
 
     updateMeta('description', metaDescription);
+    updateMeta('robots', 'index, follow');
+    updateMeta('og:site_name', siteConfig.legalName, true);
     updateMeta('og:title', fullTitle, true);
     updateMeta('og:description', metaDescription, true);
     updateMeta('og:url', canonicalUrl, true);
     updateMeta('og:type', ogType, true);
     updateMeta('og:image', ogImage, true);
+    updateMeta('twitter:card', 'summary_large_image');
     updateMeta('twitter:title', fullTitle);
     updateMeta('twitter:description', metaDescription);
     updateMeta('twitter:image', ogImage);
