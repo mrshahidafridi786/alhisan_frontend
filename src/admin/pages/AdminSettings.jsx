@@ -29,7 +29,7 @@ export const AdminSettings = () => {
     primaryPhone: '+971 50 237 7748',
     landline: '+971 2 874 1888',
     whatsapp: '+971 50 638 0515',
-    contactEmail: 'info@alhisan.ae.com',
+    contactEmail: 'info@alhisanuae.com',
     addressDetail: 'Al Reem Island / Abu Dhabi Commercial District, Abu Dhabi, United Arab Emirates',
     businessHours: 'Sunday – Thursday: 8:00 AM – 6:00 PM (GST)',
     announcementBanner: {
@@ -242,7 +242,7 @@ export const AdminSettings = () => {
                 type="email"
                 value={settings.contactEmail}
                 onChange={(e) => setSettings({ ...settings, contactEmail: e.target.value })}
-                placeholder="info@alhisan.ae.com"
+                placeholder="info@alhisanuae.com"
                 className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-navy-950 border border-slate-200 dark:border-navy-700 rounded-xl text-sm font-medium text-slate-800 dark:text-slate-100 focus:outline-none focus:border-gold-500"
               />
             </div>
