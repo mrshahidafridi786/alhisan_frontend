@@ -11,7 +11,9 @@ export const ThemeToggle = ({ className = '', showLabel = false }) => {
       onClick={toggleTheme}
       aria-label={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
       title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-      className={`relative inline-flex items-center gap-2 p-2 rounded-xl transition-all duration-300 ${
+      className={`relative inline-flex items-center justify-center transition-all duration-300 ${
+        className.includes('p-') || className.includes('h-') ? '' : 'p-2 rounded-xl gap-2'
+      } ${
         isDark
           ? 'bg-navy-800 hover:bg-navy-700 text-gold-400 border border-gold-500/40 shadow-subtle hover:shadow-gold-glow'
           : 'bg-surface-light hover:bg-slate-200 text-navy-800 border border-surface-border shadow-subtle'

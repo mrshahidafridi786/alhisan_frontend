@@ -56,8 +56,8 @@ export const Navbar = ({ onOpenQuoteModal }) => {
       }`}
       style={{ position: 'sticky', top: 0, zIndex: 50 }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between gap-6">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between gap-2 sm:gap-4 lg:gap-6">
           {/* Brand Logo */}
           <Logo />
 
@@ -168,22 +168,24 @@ export const Navbar = ({ onOpenQuoteModal }) => {
             </button>
           </div>
 
-          {/* Mobile Right: Language Selector + Theme Toggle + Menu Button */}
-          <div className="flex items-center gap-2 lg:hidden">
+          {/* Mobile Right: Language Selector + Theme Toggle + Quote CTA + Menu Button */}
+          <div className="flex items-center gap-1.5 sm:gap-2 lg:hidden shrink-0">
             <LanguageSelector isMobile={true} />
-            <ThemeToggle />
+            <ThemeToggle className="h-9 w-9 p-0 rounded-lg shrink-0 flex items-center justify-center" />
             <button
+              type="button"
               onClick={onOpenQuoteModal}
-              className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-navy-800 text-white border border-gold-500/40"
+              className="h-9 px-2.5 sm:px-3 rounded-lg text-xs font-bold tracking-wide shrink-0 inline-flex items-center justify-center bg-gold-500 hover:bg-gold-400 text-navy-950 active:bg-gold-600 border border-gold-400/50 shadow-subtle transition-colors"
             >
               {t('nav.quote', 'Quote')}
             </button>
             <button
+              type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-navy-800 dark:text-slate-200 hover:text-gold-600 dark:hover:text-gold-400 rounded-md focus:outline-none"
+              className="h-9 w-9 p-0 rounded-lg shrink-0 inline-flex items-center justify-center text-navy-800 dark:text-slate-200 bg-surface-light dark:bg-navy-800 border border-surface-border dark:border-navy-700 hover:text-gold-600 dark:hover:text-gold-400 active:bg-slate-200 dark:active:bg-navy-700 focus:outline-none transition-colors"
               aria-label="Toggle navigation menu"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>

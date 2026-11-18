@@ -42,21 +42,21 @@ export const LanguageSelector = ({ className = '', isMobile = false }) => {
         aria-expanded={isOpen}
         aria-haspopup="true"
         title="Select Language / اختر اللغة / Changer de langue / Sprache wählen / 选择语言"
-        className={`relative inline-flex items-center gap-1.5 px-2.5 py-2 rounded-xl transition-all duration-300 font-semibold text-xs tracking-wider select-none ${
+        className={`relative inline-flex items-center transition-all duration-300 font-semibold select-none ${
           isMobile
-            ? 'bg-surface-light dark:bg-navy-800 text-navy-900 dark:text-slate-100 border border-surface-border dark:border-navy-700'
-            : 'bg-surface-light hover:bg-slate-200 dark:bg-navy-800 dark:hover:bg-navy-700 text-navy-800 dark:text-slate-200 border border-surface-border dark:border-gold-500/30 hover:border-gold-500/60 shadow-subtle hover:shadow-gold-glow'
+            ? 'h-9 px-2 gap-1 rounded-lg text-xs shrink-0 bg-surface-light dark:bg-navy-800 text-navy-900 dark:text-slate-100 border border-surface-border dark:border-navy-700 active:bg-slate-200 dark:active:bg-navy-700'
+            : 'gap-1.5 px-2.5 py-2 rounded-xl text-xs tracking-wider bg-surface-light hover:bg-slate-200 dark:bg-navy-800 dark:hover:bg-navy-700 text-navy-800 dark:text-slate-200 border border-surface-border dark:border-gold-500/30 hover:border-gold-500/60 shadow-subtle hover:shadow-gold-glow'
         }`}
       >
-        <Globe className="w-4 h-4 text-gold-500 dark:text-gold-400 shrink-0" />
-        <span className="text-sm shrink-0" role="img" aria-label={currentLanguage.name}>
+        {!isMobile && <Globe className="w-4 h-4 text-gold-500 dark:text-gold-400 shrink-0" />}
+        <span className="text-xs sm:text-sm shrink-0 leading-none" role="img" aria-label={currentLanguage.name}>
           {currentLanguage.flag}
         </span>
-        <span className="font-bold text-xs uppercase hidden sm:inline-block">
+        <span className={`font-bold text-[11px] sm:text-xs uppercase ${isMobile ? 'inline-block' : 'hidden sm:inline-block'}`}>
           {currentLanguage.code.toUpperCase()}
         </span>
         <ChevronDown
-          className={`w-3.5 h-3.5 text-slate-400 dark:text-slate-400 transition-transform duration-200 ${
+          className={`w-3 h-3 text-slate-400 dark:text-slate-400 transition-transform duration-200 shrink-0 ${
             isOpen ? 'rotate-180 text-gold-500' : ''
           }`}
         />
