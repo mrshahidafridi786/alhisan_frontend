@@ -3,6 +3,8 @@ import { NavLink, Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown, ArrowRight, FileText } from 'lucide-react';
 import { Logo } from '../common/Logo';
 import { ThemeToggle } from '../common/ThemeToggle';
+import { LanguageSelector } from '../common/LanguageSelector';
+import { useLanguage } from '../../context/LanguageContext';
 import { siteConfig } from '../../data/siteConfig';
 
 export const Navbar = ({ onOpenQuoteModal }) => {
@@ -11,6 +13,7 @@ export const Navbar = ({ onOpenQuoteModal }) => {
   const [productsDropdownOpen, setProductsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
   const location = useLocation();
+  const { t, isRTL } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -61,19 +64,19 @@ export const Navbar = ({ onOpenQuoteModal }) => {
           {/* Desktop Navigation Links */}
           <nav className="hidden lg:flex items-center gap-8">
             <NavLink to="/" end className={navLinkClass}>
-              Home
+              {t('nav.home', 'Home')}
             </NavLink>
 
             <NavLink to="/about" className={navLinkClass}>
-              About Us
+              {t('nav.about', 'About Us')}
             </NavLink>
 
             <NavLink to="/leadership" className={navLinkClass}>
-              Our Leadership
+              {t('nav.leadership', 'Our Leadership')}
             </NavLink>
 
             <NavLink to="/contact" className={navLinkClass}>
-              Contact Us
+              {t('nav.contact', 'Contact Us')}
             </NavLink>
 
             {/* Products Dropdown (Positioned Last in Nav Sequence) */}
@@ -85,7 +88,7 @@ export const Navbar = ({ onOpenQuoteModal }) => {
             >
               <div className="flex items-center gap-1 cursor-pointer">
                 <NavLink to="/products" className={navLinkClass}>
-                  Products
+                  {t('nav.products', 'Products')}
                 </NavLink>
                 <button
                   type="button"
@@ -107,43 +110,43 @@ export const Navbar = ({ onOpenQuoteModal }) => {
 
               {/* Dropdown Menu */}
               {productsDropdownOpen && (
-                <div className="absolute top-full right-0 lg:left-0 w-64 pt-2 animate-fadeIn z-50">
+                <div className={`absolute top-full ${isRTL ? 'left-0 lg:right-0' : 'right-0 lg:left-0'} w-64 pt-2 animate-fadeIn z-50`}>
                   <div className="bg-white dark:bg-navy-800 rounded-lg shadow-premium border border-surface-border dark:border-navy-700 py-2 px-1">
                     <Link
                       to="/products"
                       className="block px-3 py-2 text-xs font-semibold text-navy-800 dark:text-white hover:bg-surface-light dark:hover:bg-navy-700/60 rounded transition-colors uppercase tracking-wider border-b border-surface-border/60 dark:border-navy-700/60 mb-1"
                     >
-                      All Trading Categories →
+                      {t('nav.allCategories', 'All Trading Categories →')}
                     </Link>
                     <Link
                       to="/products/salt"
                       className="block px-3 py-2 text-sm text-content-main dark:text-slate-200 hover:text-gold-600 dark:hover:text-gold-400 hover:bg-surface-light dark:hover:bg-navy-700/60 rounded transition-colors"
                     >
-                      Salt
+                      {t('nav.salt', 'Salt')}
                     </Link>
                     <Link
                       to="/products/soda-ash"
                       className="block px-3 py-2 text-sm text-content-main dark:text-slate-200 hover:text-gold-600 dark:hover:text-gold-400 hover:bg-surface-light dark:hover:bg-navy-700/60 rounded transition-colors"
                     >
-                      Soda Ash
+                      {t('nav.sodaAsh', 'Soda Ash')}
                     </Link>
                     <Link
                       to="/products/calcium-carbonate"
                       className="block px-3 py-2 text-sm text-content-main dark:text-slate-200 hover:text-gold-600 dark:hover:text-gold-400 hover:bg-surface-light dark:hover:bg-navy-700/60 rounded transition-colors"
                     >
-                      Calcium Carbonate
+                      {t('nav.calciumCarbonate', 'Calcium Carbonate')}
                     </Link>
                     <Link
                       to="/products/food"
                       className="block px-3 py-2 text-sm text-content-main dark:text-slate-200 hover:text-gold-600 dark:hover:text-gold-400 hover:bg-surface-light dark:hover:bg-navy-700/60 rounded transition-colors"
                     >
-                      Food Products
+                      {t('nav.food', 'Food Products')}
                     </Link>
                     <Link
                       to="/products/spices"
                       className="block px-3 py-2 text-sm text-content-main dark:text-slate-200 hover:text-gold-600 dark:hover:text-gold-400 hover:bg-surface-light dark:hover:bg-navy-700/60 rounded transition-colors"
                     >
-                      Spices
+                      {t('nav.spices', 'Spices')}
                     </Link>
                   </div>
                 </div>
@@ -151,28 +154,29 @@ export const Navbar = ({ onOpenQuoteModal }) => {
             </div>
           </nav>
 
-          {/* Desktop Right: Theme Toggle & Request Quote CTA */}
+          {/* Desktop Right: Language Selector + Theme Toggle + Request Quote CTA */}
           <div className="hidden lg:flex items-center gap-3">
-            {/* Theme Toggle Button */}
+            <LanguageSelector />
             <ThemeToggle />
 
             <button
               onClick={onOpenQuoteModal}
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold tracking-wide bg-navy-800 dark:bg-navy-700 text-white hover:bg-navy-700 dark:hover:bg-navy-600 active:bg-navy-900 border border-gold-500/40 shadow-subtle hover:shadow-gold-glow transition-all duration-300"
             >
-              <span>Request a Quote</span>
-              <ArrowRight className="w-4 h-4 text-gold-400" />
+              <span>{t('nav.requestQuote', 'Request a Quote')}</span>
+              <ArrowRight className={`w-4 h-4 text-gold-400 ${isRTL ? 'rotate-180' : ''}`} />
             </button>
           </div>
 
-          {/* Mobile Right: Theme Toggle + Menu Button */}
+          {/* Mobile Right: Language Selector + Theme Toggle + Menu Button */}
           <div className="flex items-center gap-2 lg:hidden">
+            <LanguageSelector isMobile={true} />
             <ThemeToggle />
             <button
               onClick={onOpenQuoteModal}
               className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-navy-800 text-white border border-gold-500/40"
             >
-              Quote
+              {t('nav.quote', 'Quote')}
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -200,7 +204,7 @@ export const Navbar = ({ onOpenQuoteModal }) => {
                   }`
                 }
               >
-                Home
+                {t('nav.home', 'Home')}
               </NavLink>
 
               <NavLink
@@ -214,7 +218,7 @@ export const Navbar = ({ onOpenQuoteModal }) => {
                   }`
                 }
               >
-                About Us
+                {t('nav.about', 'About Us')}
               </NavLink>
 
               <NavLink
@@ -228,7 +232,7 @@ export const Navbar = ({ onOpenQuoteModal }) => {
                   }`
                 }
               >
-                Our Leadership
+                {t('nav.leadership', 'Our Leadership')}
               </NavLink>
 
               <NavLink
@@ -242,7 +246,7 @@ export const Navbar = ({ onOpenQuoteModal }) => {
                   }`
                 }
               >
-                Contact Us
+                {t('nav.contact', 'Contact Us')}
               </NavLink>
 
               <div className="border-t border-b border-surface-border/60 dark:border-navy-700/60 py-2.5 my-1">
@@ -251,7 +255,7 @@ export const Navbar = ({ onOpenQuoteModal }) => {
                   onClick={() => setMobileMenuOpen(false)}
                   className="px-3 py-2 text-xs font-bold text-slate-400 uppercase tracking-widest block hover:text-gold-500"
                 >
-                  Products Portfolio →
+                  {t('nav.allCategories', 'Products Portfolio →')}
                 </Link>
                 <div className="grid grid-cols-1 pl-3 mt-1 space-y-1">
                   <Link
@@ -259,37 +263,42 @@ export const Navbar = ({ onOpenQuoteModal }) => {
                     onClick={() => setMobileMenuOpen(false)}
                     className="py-1.5 px-2 rounded text-sm text-content-main dark:text-slate-300 hover:text-gold-600 dark:hover:text-gold-400 hover:bg-slate-50 dark:hover:bg-navy-800/40 block"
                   >
-                    • Salt
+                    • {t('nav.salt', 'Salt')}
                   </Link>
                   <Link
                     to="/products/soda-ash"
                     onClick={() => setMobileMenuOpen(false)}
                     className="py-1.5 px-2 rounded text-sm text-content-main dark:text-slate-300 hover:text-gold-600 dark:hover:text-gold-400 hover:bg-slate-50 dark:hover:bg-navy-800/40 block"
                   >
-                    • Soda Ash
+                    • {t('nav.sodaAsh', 'Soda Ash')}
                   </Link>
                   <Link
                     to="/products/calcium-carbonate"
                     onClick={() => setMobileMenuOpen(false)}
                     className="py-1.5 px-2 rounded text-sm text-content-main dark:text-slate-300 hover:text-gold-600 dark:hover:text-gold-400 hover:bg-slate-50 dark:hover:bg-navy-800/40 block"
                   >
-                    • Calcium Carbonate
+                    • {t('nav.calciumCarbonate', 'Calcium Carbonate')}
                   </Link>
                   <Link
                     to="/products/food"
                     onClick={() => setMobileMenuOpen(false)}
                     className="py-1.5 px-2 rounded text-sm text-content-main dark:text-slate-300 hover:text-gold-600 dark:hover:text-gold-400 hover:bg-slate-50 dark:hover:bg-navy-800/40 block"
                   >
-                    • Food Products
+                    • {t('nav.food', 'Food Products')}
                   </Link>
                   <Link
                     to="/products/spices"
                     onClick={() => setMobileMenuOpen(false)}
                     className="py-1.5 px-2 rounded text-sm text-content-main dark:text-slate-300 hover:text-gold-600 dark:hover:text-gold-400 hover:bg-slate-50 dark:hover:bg-navy-800/40 block"
                   >
-                    • Spices
+                    • {t('nav.spices', 'Spices')}
                   </Link>
                 </div>
+              </div>
+
+              <div className="flex items-center justify-between px-3 py-2 border-t border-surface-border dark:border-navy-700/60 my-1">
+                <span className="text-sm font-medium text-navy-800 dark:text-slate-200">Language</span>
+                <LanguageSelector isMobile={true} />
               </div>
 
               <div className="flex items-center justify-between px-3 py-2 border-t border-surface-border dark:border-navy-700/60 my-1">
@@ -306,7 +315,7 @@ export const Navbar = ({ onOpenQuoteModal }) => {
                   className="w-full flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold bg-navy-800 text-white hover:bg-navy-700 shadow-subtle"
                 >
                   <FileText className="w-4 h-4 text-gold-400" />
-                  <span>Request a Formal Quote</span>
+                  <span>{t('nav.requestQuote', 'Request a Formal Quote')}</span>
                 </button>
               </div>
             </div>

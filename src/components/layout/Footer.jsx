@@ -3,8 +3,11 @@ import { Link } from 'react-router-dom';
 import { MapPin, Phone, MessageSquare, ArrowUpRight, ShieldCheck, Mail } from 'lucide-react';
 import { Logo } from '../common/Logo';
 import { siteConfig } from '../../data/siteConfig';
+import { useLanguage } from '../../context/LanguageContext';
 
 export const Footer = () => {
+  const { t, isRTL } = useLanguage();
+
   return (
     <footer className="bg-navy-900 text-slate-300 border-t border-navy-800">
       {/* Upper Footer: Main columns */}
@@ -14,18 +17,16 @@ export const Footer = () => {
           <div className="lg:col-span-2 space-y-5">
             <Logo variant="light" />
             <p className="text-slate-400 text-sm leading-relaxed max-w-sm pt-2">
-              Alhisan General Trading Company is an international trading enterprise based in Abu Dhabi, United Arab Emirates. 
-              We are dedicated to building sustainable, transparent business relationships through the commercial 
-              trading of essential industrial commodities, food products, and minerals.
+              {t('footer.description')}
             </p>
             <div className="pt-2 text-xs text-slate-400 space-y-1">
               <p className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-gold-500 shrink-0"></span>
-                <span>Jurisdiction: Abu Dhabi, United Arab Emirates</span>
+                <span>{t('footer.jurisdiction')}</span>
               </p>
               <p className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-gold-500 shrink-0"></span>
-                <span>Business Nature: International General Trading</span>
+                <span>{t('footer.nature')}</span>
               </p>
             </div>
           </div>
@@ -33,37 +34,37 @@ export const Footer = () => {
           {/* Column 3: Quick Corporate Links */}
           <div className="space-y-4">
             <h4 className="text-sm font-semibold uppercase tracking-wider text-white border-b border-navy-800 pb-2">
-              Company
+              {t('footer.colCompany')}
             </h4>
             <ul className="space-y-2.5 text-sm">
               <li>
                 <Link to="/" className="text-slate-400 hover:text-gold-400 transition-colors">
-                  Home
+                  {t('nav.home')}
                 </Link>
               </li>
               <li>
                 <Link to="/about" className="text-slate-400 hover:text-gold-400 transition-colors">
-                  About Alhisan
+                  {t('nav.about')}
                 </Link>
               </li>
               <li>
                 <Link to="/leadership" className="text-slate-400 hover:text-gold-400 transition-colors">
-                  Our Leadership
+                  {t('nav.leadership')}
                 </Link>
               </li>
               <li>
                 <Link to="/contact" className="text-slate-400 hover:text-gold-400 transition-colors">
-                  Contact Our Team
+                  {t('nav.contact')}
                 </Link>
               </li>
               <li>
                 <Link to="/privacy" className="text-slate-400 hover:text-gold-400 transition-colors">
-                  Privacy Policy
+                  {t('footer.privacyPolicy')}
                 </Link>
               </li>
               <li>
                 <Link to="/terms" className="text-slate-400 hover:text-gold-400 transition-colors">
-                  Terms & Conditions
+                  {t('footer.terms')}
                 </Link>
               </li>
             </ul>
@@ -72,38 +73,38 @@ export const Footer = () => {
           {/* Column 4: Product Portfolio */}
           <div className="space-y-4">
             <h4 className="text-sm font-semibold uppercase tracking-wider text-white border-b border-navy-800 pb-2">
-              Trading Categories
+              {t('footer.colCategories')}
             </h4>
             <ul className="space-y-2.5 text-sm">
               <li>
                 <Link to="/products/salt" className="text-slate-400 hover:text-gold-400 transition-colors">
-                  Salt
+                  {t('products.salt.name')}
                 </Link>
               </li>
               <li>
                 <Link to="/products/soda-ash" className="text-slate-400 hover:text-gold-400 transition-colors">
-                  Soda Ash
+                  {t('products.sodaAsh.name')}
                 </Link>
               </li>
               <li>
                 <Link to="/products/calcium-carbonate" className="text-slate-400 hover:text-gold-400 transition-colors">
-                  Calcium Carbonate
+                  {t('products.calciumCarbonate.name')}
                 </Link>
               </li>
               <li>
                 <Link to="/products/food" className="text-slate-400 hover:text-gold-400 transition-colors">
-                  Food Products
+                  {t('products.food.name')}
                 </Link>
               </li>
               <li>
                 <Link to="/products/spices" className="text-slate-400 hover:text-gold-400 transition-colors">
-                  Spices
+                  {t('products.spices.name')}
                 </Link>
               </li>
               <li>
                 <Link to="/products" className="text-gold-400 hover:text-gold-300 font-medium transition-colors inline-flex items-center gap-1 pt-1">
-                  <span>View All Categories</span>
-                  <ArrowUpRight className="w-3.5 h-3.5" />
+                  <span>{t('footer.viewAllCategories')}</span>
+                  <ArrowUpRight className={`w-3.5 h-3.5 ${isRTL ? 'rotate-90' : ''}`} />
                 </Link>
               </li>
             </ul>
@@ -112,7 +113,7 @@ export const Footer = () => {
           {/* Column 5: Direct Commercial Contact */}
           <div className="space-y-4">
             <h4 className="text-sm font-semibold uppercase tracking-wider text-white border-b border-navy-800 pb-2">
-              Trading Office
+              {t('footer.colContact')}
             </h4>
             <div className="space-y-3 text-sm text-slate-400">
               <div className="flex items-start gap-2.5">
@@ -162,27 +163,24 @@ export const Footer = () => {
               </div>
             </div>
 
-            {/* Social Media Status Placeholders (Strict Compliance: Only become active when real URLs supplied) */}
+            {/* Social Media Status Placeholders */}
             <div className="pt-2">
-              <p className="text-xs text-slate-500 mb-2">Corporate Social Channels:</p>
+              <p className="text-xs text-slate-500 mb-2">{t('footer.socialNotice')}</p>
               <div className="flex items-center gap-2">
-                {/* Instagram */}
                 <span
-                  title="Instagram (Official channel URL to be published)"
+                  title="Instagram"
                   className="w-8 h-8 rounded bg-navy-800 text-slate-500 flex items-center justify-center text-xs font-semibold cursor-not-allowed border border-navy-700/60"
                 >
                   IG
                 </span>
-                {/* Facebook */}
                 <span
-                  title="Facebook (Official channel URL to be published)"
+                  title="Facebook"
                   className="w-8 h-8 rounded bg-navy-800 text-slate-500 flex items-center justify-center text-xs font-semibold cursor-not-allowed border border-navy-700/60"
                 >
                   FB
                 </span>
-                {/* X */}
                 <span
-                  title="X (Twitter) (Official channel URL to be published)"
+                  title="X (Twitter)"
                   className="w-8 h-8 rounded bg-navy-800 text-slate-500 flex items-center justify-center text-xs font-semibold cursor-not-allowed border border-navy-700/60"
                 >
                   X
@@ -199,11 +197,11 @@ export const Footer = () => {
           <p>{siteConfig.copyright}</p>
           <div className="flex flex-wrap items-center justify-center md:justify-end gap-x-4 sm:gap-x-6 gap-y-2">
             <Link to="/privacy" className="hover:text-gold-400 transition-colors">
-              Privacy Policy
+              {t('footer.privacyPolicy')}
             </Link>
             <span className="text-navy-800 hidden sm:inline">•</span>
             <Link to="/terms" className="hover:text-gold-400 transition-colors">
-              Terms & Conditions
+              {t('footer.terms')}
             </Link>
             <span className="text-navy-800 hidden sm:inline">•</span>
             <Link
@@ -212,10 +210,10 @@ export const Footer = () => {
               title="Corporate Administrator Portal"
             >
               <ShieldCheck className="w-3.5 h-3.5 text-gold-500/70" />
-              <span>Admin Portal</span>
+              <span>{t('footer.adminPortal')}</span>
             </Link>
             <span className="text-navy-800 hidden sm:inline">•</span>
-            <span className="text-slate-500">Abu Dhabi, UAE</span>
+            <span className="text-slate-500">{t('footer.locationShort')}</span>
           </div>
         </div>
       </div>

@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Layers } from 'lucide-react';
-import { productsData } from '../../data/productsData';
+import { ArrowRight } from 'lucide-react';
+import { useLanguage } from '../../context/LanguageContext';
 import { API_BASE_URL } from '../../utils/api';
 
 export const ProductGrid = () => {
-  const [items, setItems] = useState(productsData);
+  const { t, products, isRTL } = useLanguage();
+  const [items, setItems] = useState(products);
+
+  useEffect(() => {
+    setItems(products);
+  }, [products]);
 
   useEffect(() => {
     const fetchLive = async () => {
@@ -15,13 +20,13 @@ export const ProductGrid = () => {
           const json = await res.json();
           if (json.success && json.data?.length) {
             const mapped = json.data.map((item, idx) => {
-              const localMatch = productsData.find((p) => p.slug === item.slug);
+              const localMatch = products.find((p) => p.slug === item.slug);
               return {
                 id: item.slug || `prod-${idx}`,
                 slug: item.slug,
-                name: item.name,
-                category: item.category,
-                shortDescription: item.shortDescription || localMatch?.shortDescription,
+                name: localMatch?.name || item.name,
+                category: localMatch?.category || item.category,
+                shortDescription: localMatch?.shortDescription || item.shortDescription,
                 imageUrl: item.imageUrl || localMatch?.imageUrl || '/assets/logo.jpg',
               };
             });
@@ -31,7 +36,7 @@ export const ProductGrid = () => {
       } catch (e) {}
     };
     fetchLive();
-  }, []);
+  }, [products]);
 
   return (
     <section className="py-20 lg:py-28 bg-surface-light dark:bg-[#0A1B2A] border-y border-surface-border dark:border-navy-800 transition-colors duration-300">
@@ -41,13 +46,13 @@ export const ProductGrid = () => {
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 text-xs font-bold text-gold-600 dark:text-gold-400 uppercase tracking-widest mb-3">
               <span className="w-6 h-[1.5px] bg-gold-600 dark:bg-gold-400"></span>
-              <span>Commercial Commodities & Materials</span>
+              <span>{t('productGrid.badge')}</span>
             </div>
             <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-navy-800 dark:text-white tracking-tight">
-              Our Product Portfolio
+              {t('productGrid.title')}
             </h2>
             <p className="mt-3 text-content-muted dark:text-slate-400 text-base">
-              Explore our range of industrial materials and essential trading products.
+              {t('productGrid.subtitle')}
             </p>
           </div>
 
@@ -56,8 +61,8 @@ export const ProductGrid = () => {
               to="/products"
               className="inline-flex items-center gap-2 text-sm font-semibold text-navy-800 dark:text-gold-400 hover:text-gold-600 dark:hover:text-gold-300 transition-colors group"
             >
-              <span>View Full Trading Catalog</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform text-gold-600 dark:text-gold-400" />
+              <span>{t('productGrid.viewAll')}</span>
+              <ArrowRight className={`w-4 h-4 transition-transform text-gold-600 dark:text-gold-400 ${isRTL ? 'group-hover:-translate-x-1 rotate-180' : 'group-hover:translate-x-1'}`} />
             </Link>
           </div>
         </div>
@@ -105,11 +110,11 @@ export const ProductGrid = () => {
                     to={`/products/${product.slug}`}
                     className="inline-flex items-center gap-1.5 text-sm font-semibold text-navy-800 dark:text-slate-200 hover:text-gold-600 dark:hover:text-gold-400 transition-colors"
                   >
-                    <span>Explore Product</span>
-                    <ArrowRight className="w-4 h-4 text-gold-500 group-hover:translate-x-1 transition-transform" />
+                    <span>{t('productGrid.explore')}</span>
+                    <ArrowRight className={`w-4 h-4 text-gold-500 transition-transform ${isRTL ? 'group-hover:-translate-x-1 rotate-180' : 'group-hover:translate-x-1'}`} />
                   </Link>
                   <span className="text-xs text-slate-400 dark:text-slate-500 font-medium">
-                    Trading Details
+                    {t('productGrid.tradingDetails')}
                   </span>
                 </div>
               </div>

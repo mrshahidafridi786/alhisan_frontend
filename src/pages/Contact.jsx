@@ -22,11 +22,10 @@ import {
 import { SEO } from '../components/common/SEO';
 import { siteConfig } from '../data/siteConfig';
 import { submitContactInquiry } from '../utils/api';
-
-/* ─── Reusable styled input components with Dark Mode ─── */
+import { useLanguage } from '../context/LanguageContext';
 
 const inputBase =
-  'w-full bg-white dark:bg-navy-900 border rounded-xl px-4 py-3.5 text-sm text-content-main dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 ' +
+  'w-full bg-white dark:bg-navy-900 border rounded-xl py-3.5 text-sm text-content-main dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 ' +
   'focus:outline-none focus:ring-2 focus:ring-navy-700/30 dark:focus:ring-gold-500/30 focus:border-navy-700 dark:focus:border-gold-500 ' +
   'transition-all duration-200';
 
@@ -38,7 +37,7 @@ const inputNormal = 'border-slate-200 dark:border-navy-700 hover:border-slate-30
 const FieldLabel = ({ children, required }) => (
   <label className="block text-[11px] font-bold uppercase tracking-widest text-navy-800/80 dark:text-slate-200 mb-1.5">
     {children}
-    {required && <span className="text-gold-500 ml-1">*</span>}
+    {required && <span className="text-gold-500 mx-1">*</span>}
   </label>
 );
 
@@ -50,15 +49,9 @@ const FieldError = ({ msg }) =>
     </p>
   ) : null;
 
-const InputIcon = ({ children }) => (
-  <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 pointer-events-none">
-    {children}
-  </div>
-);
-
-/* ─── Main Contact Page ─── */
-
 export const Contact = () => {
+  const { t, isRTL } = useLanguage();
+
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -94,17 +87,17 @@ export const Contact = () => {
   const validateForm = () => {
     const errors = {};
     if (!formData.fullName.trim() || formData.fullName.trim().length < 2)
-      errors.fullName = 'Please enter your full name (at least 2 characters).';
+      errors.fullName = t('quoteModal.nameRequired');
     if (!formData.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim()))
-      errors.email = 'A valid business email address is required.';
+      errors.email = t('quoteModal.emailRequired');
     if (!formData.phone.trim() || formData.phone.replace(/[\s\-\(\)\.]/g, '').length < 7)
-      errors.phone = 'A valid international phone number is required.';
+      errors.phone = t('quoteModal.phoneRequired');
     if (!formData.subject.trim())
-      errors.subject = 'Please provide a subject for your inquiry.';
+      errors.subject = t('quoteModal.productRequired');
     if (!formData.productInterest)
-      errors.productInterest = 'Please select a product category.';
+      errors.productInterest = t('quoteModal.productRequired');
     if (!formData.message.trim() || formData.message.trim().length < 10)
-      errors.message = 'Please describe your requirements in at least 10 characters.';
+      errors.message = t('quoteModal.messageRequired');
     setFieldErrors(errors);
     return Object.keys(errors).length === 0;
   };
@@ -128,6 +121,8 @@ export const Contact = () => {
     }
   };
 
+  const padInput = isRTL ? 'pr-10 pl-4' : 'pl-10 pr-4';
+
   return (
     <div className="bg-surface-warm dark:bg-[#071524] transition-colors duration-300">
       <SEO
@@ -150,14 +145,13 @@ export const Contact = () => {
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 text-xs font-bold text-gold-400 uppercase tracking-widest mb-4">
               <span className="w-6 h-[1.5px] bg-gold-400"></span>
-              <span>Commercial Telecommunications</span>
+              <span>{t('contactPage.heroBadge')}</span>
             </div>
             <h1 className="font-heading text-4xl sm:text-5xl font-extrabold tracking-tight text-white">
-              Contact Alhisan
+              {t('contactPage.heroTitle')}
             </h1>
             <p className="mt-4 text-lg text-slate-300 leading-relaxed">
-              Reach our trading desk in Abu Dhabi to submit product inquiries, request formal quotations,
-              or establish strategic commercial distribution arrangements.
+              {t('contactPage.heroSubtitle')}
             </p>
           </div>
         </div>
@@ -172,13 +166,13 @@ export const Contact = () => {
             <div className="lg:col-span-5 space-y-8">
               <div>
                 <span className="text-xs font-bold text-gold-600 dark:text-gold-400 uppercase tracking-widest block mb-2">
-                  Direct Communications
+                  {t('contactPage.channelsTitle')}
                 </span>
                 <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-navy-800 dark:text-white">
-                  Trading Office & Channels
+                  {t('footer.colContact')}
                 </h2>
                 <p className="mt-3 text-content-muted dark:text-slate-400 text-sm leading-relaxed">
-                  Our commercial team handles international inquiries during UAE standard business hours.
+                  {siteConfig.contact.hours}
                 </p>
               </div>
 
@@ -189,7 +183,7 @@ export const Contact = () => {
                     <Phone className="w-5 h-5" />
                   </div>
                   <div>
-                    <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Primary Commercial Mobile</span>
+                    <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">{t('contactPage.phoneLines')}</span>
                     <a href={siteConfig.contact.primaryPhone.telLink} className="font-heading text-lg font-bold text-navy-800 dark:text-white hover:text-gold-600 dark:hover:text-gold-400 transition-colors block mt-0.5">
                       {siteConfig.contact.primaryPhone.formatted}
                     </a>
@@ -203,7 +197,7 @@ export const Contact = () => {
                     <MessageSquare className="w-5 h-5" />
                   </div>
                   <div className="flex-grow">
-                    <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">WhatsApp Business</span>
+                    <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">{t('contactPage.whatsAppDesk')}</span>
                     <a href={siteConfig.contact.whatsApp.waLink} target="_blank" rel="noopener noreferrer"
                       className="font-heading text-lg font-bold text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 transition-colors block mt-0.5">
                       {siteConfig.contact.whatsApp.formatted}
@@ -212,7 +206,7 @@ export const Contact = () => {
                     <a href={siteConfig.contact.whatsApp.waLink} target="_blank" rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 mt-2 text-xs font-semibold px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white transition-colors">
                       <MessageSquare className="w-3.5 h-3.5" />
-                      Open WhatsApp Conversation
+                      <span>{t('cta.buttonWhatsApp')}</span>
                     </a>
                   </div>
                 </div>
@@ -223,7 +217,7 @@ export const Contact = () => {
                     <Mail className="w-5 h-5" />
                   </div>
                   <div className="flex-grow min-w-0">
-                    <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Official Business Email</span>
+                    <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">{t('footer.colContact')}</span>
                     <a
                       href={siteConfig.contact.email.gmailCompose}
                       target="_blank"
@@ -245,7 +239,7 @@ export const Contact = () => {
                         className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg bg-navy-800 dark:bg-navy-700 hover:bg-gold-500 hover:text-navy-950 text-white transition-all shadow-xs"
                       >
                         <ExternalLink className="w-3.5 h-3.5 text-gold-400" />
-                        <span>Send Direct via Gmail</span>
+                        <span>{t('contactPage.directGmail')}</span>
                       </a>
 
                       {/* Default Mail App (mailto) */}
@@ -254,7 +248,7 @@ export const Contact = () => {
                         className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-navy-800 hover:bg-slate-200 dark:hover:bg-navy-700 text-slate-700 dark:text-slate-200 transition-colors"
                       >
                         <Mail className="w-3.5 h-3.5 text-slate-500" />
-                        <span>Email App</span>
+                        <span>{t('contactPage.emailApp')}</span>
                       </a>
 
                       {/* Copy Email Button */}
@@ -266,12 +260,12 @@ export const Contact = () => {
                         {emailCopied ? (
                           <>
                             <Check className="w-3.5 h-3.5 text-emerald-500" />
-                            <span className="text-emerald-500 font-bold">Copied!</span>
+                            <span className="text-emerald-500 font-bold">{t('contactPage.copied')}</span>
                           </>
                         ) : (
                           <>
                             <Copy className="w-3.5 h-3.5 text-slate-400" />
-                            <span>Copy Email</span>
+                            <span>{t('contactPage.copyEmail')}</span>
                           </>
                         )}
                       </button>
@@ -299,9 +293,9 @@ export const Contact = () => {
                     <MapPin className="w-5 h-5" />
                   </div>
                   <div>
-                    <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Headquarters Location</span>
+                    <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">{t('contactPage.officeAddress')}</span>
                     <h3 className="font-heading text-base font-bold text-navy-800 dark:text-white mt-0.5">{siteConfig.location.fullFormatted}</h3>
-                    <p className="text-xs text-content-muted dark:text-slate-400 mt-1">Operating under UAE international commercial trade regulations.</p>
+                    <p className="text-xs text-content-muted dark:text-slate-400 mt-1">{t('footer.jurisdiction')}</p>
                   </div>
                 </div>
               </div>
@@ -310,7 +304,7 @@ export const Contact = () => {
               <div className="p-5 rounded-xl bg-surface-light dark:bg-navy-900 border border-surface-border dark:border-navy-700/80 text-xs text-content-muted dark:text-slate-400 space-y-2">
                 <div className="flex items-center gap-2 font-semibold text-navy-800 dark:text-slate-200">
                   <ShieldCheck className="w-4 h-4 text-gold-600 dark:text-gold-400" />
-                  <span>Commercial Confidentiality</span>
+                  <span>{t('quoteModal.confidential')}</span>
                 </div>
                 <p>All commercial inquiries and partner communications submitted to Alhisan are held in strict business confidence.</p>
               </div>
@@ -329,13 +323,13 @@ export const Contact = () => {
                   />
                   <div>
                     <span className="text-gold-400 text-[11px] font-bold uppercase tracking-widest block mb-0.5">
-                      Alhisan Trading Desk · Abu Dhabi
+                      {t('quoteModal.desk')}
                     </span>
                     <h3 className="font-heading text-lg sm:text-xl font-extrabold text-white">
-                      Submit a Commercial Inquiry
+                      {t('contactPage.inquiryFormTitle')}
                     </h3>
                     <p className="text-slate-400 text-xs mt-0.5">
-                      All fields marked <span className="text-gold-400">*</span> are required.
+                      {t('contactPage.inquiryFormSubtitle')}
                     </p>
                   </div>
                 </div>
@@ -346,11 +340,11 @@ export const Contact = () => {
                       <div className="w-16 h-16 bg-emerald-100 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 rounded-full flex items-center justify-center mx-auto">
                         <CheckCircle2 className="w-10 h-10" />
                       </div>
-                      <h4 className="font-heading text-2xl font-bold text-navy-800 dark:text-white">Inquiry Transmitted Successfully</h4>
+                      <h4 className="font-heading text-2xl font-bold text-navy-800 dark:text-white">{t('contactPage.successTitle')}</h4>
                       <p className="text-content-muted dark:text-slate-400 text-sm max-w-md mx-auto leading-relaxed">{successResponse}</p>
                       <button onClick={() => setSuccessResponse(null)}
                         className="mt-4 px-7 py-2.5 rounded-xl bg-navy-800 dark:bg-navy-700 text-white font-semibold text-sm hover:bg-navy-700 dark:hover:bg-navy-600 transition-colors">
-                        Submit Another Inquiry
+                        {t('quoteModal.closeWindow')}
                       </button>
                     </div>
                   ) : (
@@ -373,26 +367,30 @@ export const Contact = () => {
                       {/* Row 1: Full Name + Email */}
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                         <div>
-                          <FieldLabel required>Full Name</FieldLabel>
+                          <FieldLabel required>{t('contactPage.formFullName')}</FieldLabel>
                           <div className="relative">
-                            <InputIcon><User className="w-4 h-4" /></InputIcon>
+                            <div className={`absolute ${isRTL ? 'right-3.5' : 'left-3.5'} top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 pointer-events-none`}>
+                              <User className="w-4 h-4" />
+                            </div>
                             <input type="text" name="fullName" required autoComplete="name"
                               value={formData.fullName} onChange={handleChange}
-                              placeholder="e.g. Mohammed Al-Rashidi"
-                              className={`${inputBase} pl-10 ${fieldErrors.fullName ? inputError : inputNormal}`}
+                              placeholder={t('quoteModal.namePlaceholder')}
+                              className={`${inputBase} ${padInput} ${fieldErrors.fullName ? inputError : inputNormal}`}
                             />
                           </div>
                           <FieldError msg={fieldErrors.fullName} />
                         </div>
 
                         <div>
-                          <FieldLabel required>Business Email</FieldLabel>
+                          <FieldLabel required>{t('contactPage.formEmail')}</FieldLabel>
                           <div className="relative">
-                            <InputIcon><AtSign className="w-4 h-4" /></InputIcon>
+                            <div className={`absolute ${isRTL ? 'right-3.5' : 'left-3.5'} top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 pointer-events-none`}>
+                              <AtSign className="w-4 h-4" />
+                            </div>
                             <input type="email" name="email" required autoComplete="email"
                               value={formData.email} onChange={handleChange}
-                              placeholder="name@yourcompany.com"
-                              className={`${inputBase} pl-10 ${fieldErrors.email ? inputError : inputNormal}`}
+                              placeholder={t('quoteModal.emailPlaceholder')}
+                              className={`${inputBase} ${padInput} ${fieldErrors.email ? inputError : inputNormal}`}
                             />
                           </div>
                           <FieldError msg={fieldErrors.email} />
@@ -402,26 +400,30 @@ export const Contact = () => {
                       {/* Row 2: Phone + Company */}
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                         <div>
-                          <FieldLabel required>Phone / WhatsApp</FieldLabel>
+                          <FieldLabel required>{t('contactPage.formPhone')}</FieldLabel>
                           <div className="relative">
-                            <InputIcon><Phone className="w-4 h-4" /></InputIcon>
+                            <div className={`absolute ${isRTL ? 'right-3.5' : 'left-3.5'} top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 pointer-events-none`}>
+                              <Phone className="w-4 h-4" />
+                            </div>
                             <input type="tel" name="phone" required autoComplete="tel"
                               value={formData.phone} onChange={handleChange}
-                              placeholder="+971 50 000 0000"
-                              className={`${inputBase} pl-10 ${fieldErrors.phone ? inputError : inputNormal}`}
+                              placeholder={t('quoteModal.phonePlaceholder')}
+                              className={`${inputBase} ${padInput} ${fieldErrors.phone ? inputError : inputNormal}`}
                             />
                           </div>
                           <FieldError msg={fieldErrors.phone} />
                         </div>
 
                         <div>
-                          <FieldLabel>Company / Organisation</FieldLabel>
+                          <FieldLabel>{t('contactPage.formCompany')}</FieldLabel>
                           <div className="relative">
-                            <InputIcon><Briefcase className="w-4 h-4" /></InputIcon>
+                            <div className={`absolute ${isRTL ? 'right-3.5' : 'left-3.5'} top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 pointer-events-none`}>
+                              <Briefcase className="w-4 h-4" />
+                            </div>
                             <input type="text" name="companyName" autoComplete="organization"
                               value={formData.companyName} onChange={handleChange}
-                              placeholder="Your company or trading entity"
-                              className={`${inputBase} pl-10 ${inputNormal}`}
+                              placeholder={t('quoteModal.companyPlaceholder')}
+                              className={`${inputBase} ${padInput} ${inputNormal}`}
                             />
                           </div>
                         </div>
@@ -430,20 +432,22 @@ export const Contact = () => {
                       {/* Row 3: Product Interest + Subject */}
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                         <div>
-                          <FieldLabel required>Product of Interest</FieldLabel>
+                          <FieldLabel required>{t('contactPage.formCommodity')}</FieldLabel>
                           <div className="relative">
-                            <InputIcon><FileText className="w-4 h-4" /></InputIcon>
+                            <div className={`absolute ${isRTL ? 'right-3.5' : 'left-3.5'} top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 pointer-events-none`}>
+                              <FileText className="w-4 h-4" />
+                            </div>
                             <select name="productInterest" required
                               value={formData.productInterest} onChange={handleChange}
-                              className={`${inputBase} pl-10 pr-10 appearance-none cursor-pointer ${inputNormal}`}>
-                              <option value="Salt">Salt</option>
-                              <option value="Soda Ash">Soda Ash</option>
-                              <option value="Calcium Carbonate">Calcium Carbonate</option>
-                              <option value="Food Products">Food Products</option>
-                              <option value="Spices">Spices</option>
-                              <option value="Other">Other / General Inquiry</option>
+                              className={`${inputBase} ${padInput} ${isRTL ? 'pl-10' : 'pr-10'} appearance-none cursor-pointer ${inputNormal}`}>
+                              <option value="Salt">{t('quoteModal.options.salt')}</option>
+                              <option value="Soda Ash">{t('quoteModal.options.sodaAsh')}</option>
+                              <option value="Calcium Carbonate">{t('quoteModal.options.calciumCarbonate')}</option>
+                              <option value="Food Products">{t('quoteModal.options.food')}</option>
+                              <option value="Spices">{t('quoteModal.options.spices')}</option>
+                              <option value="Other">{t('quoteModal.options.other')}</option>
                             </select>
-                            <div className="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+                            <div className={`absolute ${isRTL ? 'left-3.5' : 'right-3.5'} top-1/2 -translate-y-1/2 pointer-events-none text-slate-400`}>
                               <ChevronDown className="w-4 h-4" />
                             </div>
                           </div>
@@ -451,11 +455,11 @@ export const Contact = () => {
                         </div>
 
                         <div>
-                          <FieldLabel required>Subject</FieldLabel>
+                          <FieldLabel required>{t('quoteModal.subject')}</FieldLabel>
                           <input type="text" name="subject" required
                             value={formData.subject} onChange={handleChange}
-                            placeholder="e.g. Bulk Supply Quotation Request"
-                            className={`${inputBase} ${fieldErrors.subject ? inputError : inputNormal}`}
+                            placeholder={t('quoteModal.subjectPlaceholder')}
+                            className={`${inputBase} px-4 ${fieldErrors.subject ? inputError : inputNormal}`}
                           />
                           <FieldError msg={fieldErrors.subject} />
                         </div>
@@ -463,11 +467,11 @@ export const Contact = () => {
 
                       {/* Row 4: Message */}
                       <div>
-                        <FieldLabel required>Message & Trade Requirements</FieldLabel>
+                        <FieldLabel required>{t('contactPage.formMessage')}</FieldLabel>
                         <textarea name="message" rows="5" required
                           value={formData.message} onChange={handleChange}
-                          placeholder="Please describe your requirements — including estimated quantity, preferred delivery terms (e.g. CIF, FOB), destination port, and any relevant technical parameters. Our Abu Dhabi trading desk will respond promptly."
-                          className={`${inputBase} resize-none ${fieldErrors.message ? inputError : inputNormal}`}
+                          placeholder={t('quoteModal.messagePlaceholder')}
+                          className={`${inputBase} px-4 resize-none ${fieldErrors.message ? inputError : inputNormal}`}
                         />
                         <FieldError msg={fieldErrors.message} />
                       </div>
@@ -476,15 +480,15 @@ export const Contact = () => {
                       <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
                         <span className="text-[11px] text-slate-400 dark:text-slate-500 flex items-center gap-1.5">
                           <ShieldCheck className="w-3.5 h-3.5 text-gold-500" />
-                          Your data is handled in strict commercial confidence.
+                          {t('quoteModal.confidential')}
                         </span>
                         <button type="submit" disabled={loading}
                           className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-xl text-sm font-bold tracking-wide bg-navy-800 dark:bg-navy-700 text-white hover:bg-navy-700 dark:hover:bg-navy-600 active:bg-navy-900 border border-gold-500/40 shadow-premium disabled:opacity-50 transition-all duration-300"
                         >
                           {loading ? (
-                            <><Loader2 className="w-4 h-4 animate-spin text-gold-400" /><span>Sending Inquiry…</span></>
+                            <><Loader2 className="w-4 h-4 animate-spin text-gold-400" /><span>{t('contactPage.sending')}</span></>
                           ) : (
-                            <><Send className="w-4 h-4 text-gold-400" /><span>Send Inquiry</span></>
+                            <><Send className={`w-4 h-4 text-gold-400 ${isRTL ? 'rotate-180' : ''}`} /><span>{t('contactPage.formSubmit')}</span></>
                           )}
                         </button>
                       </div>

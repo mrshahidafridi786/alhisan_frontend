@@ -1,15 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Shield, UserCheck, ArrowRight, Building, Award } from 'lucide-react';
+import { Shield, ArrowRight, Building, Award } from 'lucide-react';
 import { SEO } from '../components/common/SEO';
-import { leadershipData } from '../data/leadershipData';
+import { useLanguage } from '../context/LanguageContext';
 
 export const Leadership = () => {
+  const { t, leadership, isRTL } = useLanguage();
+
   return (
     <div className="bg-surface-warm dark:bg-[#071524] transition-colors duration-300">
       <SEO
-        title="Our Leadership | Executive Governance — Alhisan General Trading Company"
-        description="Meet the leadership of Alhisan General Trading Company: Chairman Naser Almazrouie, CEO Muhammad Almazrouie, and Manager Marwan Israfeel, directing commercial operations from Abu Dhabi."
+        title="Our Leadership | Executive Governance — AL HISAN AL ASWA GENERAL TRADING"
+        description="Meet the leadership of AL HISAN AL ASWA GENERAL TRADING: Chairman Naser Almazrouie, CEO Muhammad Almazrouie, and Manager Marwan Israfeel, directing commercial operations from Abu Dhabi."
         canonical="/leadership"
       />
 
@@ -28,14 +30,13 @@ export const Leadership = () => {
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 text-xs font-bold text-gold-400 uppercase tracking-widest mb-4">
               <span className="w-6 h-[1.5px] bg-gold-400"></span>
-              <span>Corporate Governance & Stewardship</span>
+              <span>{t('leadershipPage.heroBadge')}</span>
             </div>
             <h1 className="font-heading text-4xl sm:text-5xl font-extrabold tracking-tight text-white">
-              Our Leadership
+              {t('leadershipPage.heroTitle')}
             </h1>
             <p className="mt-4 text-lg text-slate-300 leading-relaxed">
-              The executive leadership team guiding Alhisan’s strategic direction, commercial governance, 
-              and international trading relationships from Abu Dhabi.
+              {t('leadershipPage.heroSubtitle')}
             </p>
           </div>
         </div>
@@ -46,19 +47,18 @@ export const Leadership = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mb-16">
             <span className="text-xs font-bold text-gold-600 dark:text-gold-400 uppercase tracking-widest block mb-2">
-              Executive Committee
+              {t('leadershipSection.badge')}
             </span>
             <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-navy-800 dark:text-white">
-              Steering International Commercial Excellence
+              {t('leadershipSection.title')}
             </h2>
             <p className="mt-3 text-content-muted dark:text-slate-400 text-base leading-relaxed">
-              Alhisan is led by an experienced executive management structure dedicated to commercial transparency, 
-              sustainable enterprise growth, and reliable cross-border commodity flow.
+              {t('leadershipSection.subtitle')}
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-10">
-            {leadershipData.map((member) => (
+            {leadership.map((member) => (
               <div
                 key={member.id}
                 className="bg-white dark:bg-navy-900 rounded-2xl border border-surface-border dark:border-navy-700/80 shadow-subtle hover:shadow-premium hover:border-gold-500/50 dark:hover:border-gold-500/50 transition-all duration-300 overflow-hidden flex flex-col justify-between"
@@ -70,16 +70,16 @@ export const Leadership = () => {
                       {member.portrait ? (
                         <img
                           src={member.portrait}
-                          alt={member.portraitPlaceholder.alt}
+                          alt={member.portraitPlaceholder?.alt || member.name}
                           className="w-full h-full object-cover object-top"
                         />
                       ) : (
                         <div className="w-full h-full flex flex-col items-center justify-center text-gold-400">
                           <span className="font-heading text-3xl font-bold tracking-wider">
-                            {member.portraitPlaceholder.initials}
+                            {member.portraitPlaceholder?.initials || 'EXE'}
                           </span>
                           <span className="text-[9px] uppercase tracking-widest text-slate-300 mt-1">
-                            Executive Officer
+                            {t('leadershipSection.executiveTag')}
                           </span>
                         </div>
                       )}
@@ -106,14 +106,10 @@ export const Leadership = () => {
                     <p className="text-content-muted dark:text-slate-400 text-sm leading-relaxed">
                       {member.bioPlaceholder}
                     </p>
-                    <div className="p-3 rounded-lg bg-surface-light dark:bg-navy-800/60 border border-surface-border/60 dark:border-navy-700/60 text-[11.5px] text-slate-500 dark:text-slate-400">
-                      Official executive profile and complete background will be published upon formal corporate clearance.
-                    </div>
                   </div>
 
                   <div className="pt-6 mt-6 border-t border-surface-border/60 dark:border-navy-800 text-xs text-navy-800 dark:text-slate-200 font-semibold flex items-center justify-between">
-                    <span>Alhisan General Trading Company</span>
-                    <span className="text-gold-600 dark:text-gold-400">Abu Dhabi, UAE</span>
+                    <span>{t('leadershipSection.companyLocation')}</span>
                   </div>
                 </div>
               </div>
@@ -126,30 +122,30 @@ export const Leadership = () => {
               <div className="space-y-2">
                 <div className="flex items-center gap-2 text-navy-800 dark:text-white font-bold text-sm">
                   <Building className="w-4 h-4 text-gold-600 dark:text-gold-400" />
-                  <span>Strategic Stewardship</span>
+                  <span>{t('aboutPage.v1Title')}</span>
                 </div>
                 <p className="text-xs text-content-muted dark:text-slate-400 leading-relaxed">
-                  Active board governance providing directional guidance, risk management, and long-term commercial positioning.
+                  {t('aboutPage.v1Desc')}
                 </p>
               </div>
 
               <div className="space-y-2">
                 <div className="flex items-center gap-2 text-navy-800 dark:text-white font-bold text-sm">
                   <Award className="w-4 h-4 text-gold-600 dark:text-gold-400" />
-                  <span>Operational Transparency</span>
+                  <span>{t('aboutPage.v2Title')}</span>
                 </div>
                 <p className="text-xs text-content-muted dark:text-slate-400 leading-relaxed">
-                  Adhering to verified trade customs, disciplined compliance, and direct accountability to partners.
+                  {t('aboutPage.v2Desc')}
                 </p>
               </div>
 
               <div className="space-y-2">
                 <div className="flex items-center gap-2 text-navy-800 dark:text-white font-bold text-sm">
                   <Shield className="w-4 h-4 text-gold-600 dark:text-gold-400" />
-                  <span>Commercial Integrity</span>
+                  <span>{t('aboutPage.v3Title')}</span>
                 </div>
                 <p className="text-xs text-content-muted dark:text-slate-400 leading-relaxed">
-                  Ensuring that commitments made on contracts are honored accurately and reliably from Abu Dhabi.
+                  {t('aboutPage.v3Desc')}
                 </p>
               </div>
             </div>
@@ -161,8 +157,8 @@ export const Leadership = () => {
               to="/contact"
               className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl text-sm font-semibold bg-navy-800 dark:bg-navy-700 text-white hover:bg-navy-700 dark:hover:bg-navy-600 active:bg-navy-900 border border-gold-500/40 shadow-subtle transition-all"
             >
-              <span>Connect with Our Management Team</span>
-              <ArrowRight className="w-4 h-4 text-gold-400" />
+              <span>{t('cta.buttonContact')}</span>
+              <ArrowRight className={`w-4 h-4 text-gold-400 ${isRTL ? 'rotate-180' : ''}`} />
             </Link>
           </div>
         </div>

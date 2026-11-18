@@ -1,14 +1,15 @@
 import React from 'react';
-import { ShieldCheck, Lock, Eye, FileText } from 'lucide-react';
 import { SEO } from '../components/common/SEO';
-import { siteConfig } from '../data/siteConfig';
+import { useLanguage } from '../context/LanguageContext';
 
 export const Privacy = () => {
+  const { t } = useLanguage();
+
   return (
     <div className="bg-surface-warm dark:bg-[#071524] py-16 lg:py-24 transition-colors duration-300">
       <SEO
-        title="Privacy Policy | Alhisan General Trading Company"
-        description="Privacy policy and data governance practices of Alhisan General Trading Company, operating in Abu Dhabi, United Arab Emirates."
+        title="Privacy Policy | AL HISAN AL ASWA GENERAL TRADING"
+        description="Privacy policy and data governance practices of AL HISAN AL ASWA GENERAL TRADING, operating in Abu Dhabi, United Arab Emirates."
         canonical="/privacy"
       />
 
@@ -16,13 +17,13 @@ export const Privacy = () => {
         <div className="bg-white dark:bg-navy-900 rounded-2xl border border-surface-border dark:border-navy-700/80 shadow-subtle p-8 sm:p-12 space-y-8">
           <div>
             <span className="text-xs font-bold text-gold-600 dark:text-gold-400 uppercase tracking-widest block mb-2">
-              Corporate Governance
+              {t('aboutPage.valuesBadge')}
             </span>
             <h1 className="font-heading text-3xl sm:text-4xl font-extrabold text-navy-800 dark:text-white">
-              Privacy Policy
+              {t('privacyPage.title')}
             </h1>
             <p className="mt-2 text-xs text-slate-400 dark:text-slate-500">
-              Last Updated: 2026 • Alhisan General Trading Company, Abu Dhabi, United Arab Emirates
+              {t('privacyPage.lastUpdated')} • AL HISAN AL ASWA GENERAL TRADING, Abu Dhabi, United Arab Emirates
             </p>
           </div>
 
@@ -32,9 +33,7 @@ export const Privacy = () => {
                 1. Overview & Commitment to Confidentiality
               </h2>
               <p className="text-content-muted dark:text-slate-400">
-                Alhisan General Trading Company (&ldquo;Alhisan&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;) respects the confidentiality 
-                and privacy of visitors to Alhisan.com and commercial counterparties who communicate with our trading desk. 
-                This Privacy Policy outlines how information submitted through our corporate website is handled.
+                {t('privacyPage.intro')}
               </p>
             </section>
 
@@ -59,37 +58,27 @@ export const Privacy = () => {
                 3. Purpose of Data Processing
               </h2>
               <p className="text-content-muted dark:text-slate-400">
-                Collected information is utilized strictly for lawful commercial trading communications:
-              </p>
-              <ul className="list-disc list-inside space-y-1 text-content-muted dark:text-slate-400 text-sm pl-2">
-                <li>Evaluating your commodity inquiry or quotation request</li>
-                <li>Direct business communication from our Abu Dhabi commercial office</li>
-                <li>Providing requested technical specifications and availability updates</li>
-                <li>Complying with applicable UAE commercial laws and trade recordkeeping requirements</li>
-              </ul>
-              <p className="text-content-muted dark:text-slate-400">
-                We do not sell, rent, lease, or monetize user data under any circumstances.
+                Data provided is processed exclusively to respond to procurement inquiries, prepare formal commercial quotations, 
+                coordinate commodity deliveries, and maintain professional commercial communications.
               </p>
             </section>
 
             <section className="space-y-3">
               <h2 className="font-heading text-lg font-bold text-navy-800 dark:text-white">
-                4. Data Protection & Security
+                4. Data Security & Storage
               </h2>
               <p className="text-content-muted dark:text-slate-400">
-                We implement industry-standard administrative, physical, and technical measures to protect submitted 
-                commercial inquiries against unauthorized access, loss, or misuse.
+                We implement industry-standard technical security measures to safeguard corporate inquiries and commercial correspondence 
+                against unauthorized disclosure, alteration, or interception.
               </p>
             </section>
 
             <section className="space-y-3">
               <h2 className="font-heading text-lg font-bold text-navy-800 dark:text-white">
-                5. Contact Regarding Privacy
+                5. Contact & Privacy Inquiries
               </h2>
               <p className="text-content-muted dark:text-slate-400">
-                If you have questions regarding data governance or wish to update submitted contact records, please contact 
-                our Abu Dhabi office via the primary telephone line ({siteConfig.contact.primaryPhone.formatted}) or our 
-                contact inquiry form.
+                For questions regarding corporate privacy or data handling, please contact our Abu Dhabi office directly at info@alhisanuae.com.
               </p>
             </section>
           </div>

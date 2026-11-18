@@ -4,31 +4,29 @@ import {
   ArrowRight, 
   ChevronRight, 
   FileText, 
-  CheckCircle2, 
   Info, 
-  Building2, 
   ShieldCheck, 
-  PhoneCall,
   MessageSquare
 } from 'lucide-react';
 import { SEO } from '../components/common/SEO';
-import { productsData } from '../data/productsData';
 import { siteConfig } from '../data/siteConfig';
+import { useLanguage } from '../context/LanguageContext';
 
 export const ProductDetail = () => {
   const { slug } = useParams();
   const { openQuoteModal } = useOutletContext();
+  const { t, products, isRTL } = useLanguage();
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
-  // Normalize slug matching
-  const product = productsData.find((p) => p.slug === slug || p.id === slug);
+  // Normalize slug matching using localized products
+  const product = products.find((p) => p.slug === slug || p.id === slug);
 
   if (!product) {
     return <Navigate to="/products" replace />;
   }
 
   // Related products (all except current)
-  const relatedProducts = productsData.filter((p) => p.id !== product.id).slice(0, 3);
+  const relatedProducts = products.filter((p) => p.id !== product.id).slice(0, 3);
 
   const images = product.galleryImages && product.galleryImages.length > 0 
     ? product.galleryImages 
@@ -37,7 +35,7 @@ export const ProductDetail = () => {
   return (
     <div className="bg-surface-warm dark:bg-[#071524] transition-colors duration-300">
       <SEO
-        title={`${product.name} Trading & Sourcing | Alhisan Abu Dhabi`}
+        title={`${product.name} | AL HISAN AL ASWA GENERAL TRADING`}
         description={product.shortDescription}
         canonical={`/products/${product.slug}`}
         ogImage={product.imageUrl}
@@ -47,13 +45,13 @@ export const ProductDetail = () => {
       <div className="bg-white dark:bg-navy-900 border-b border-surface-border dark:border-navy-800 py-3 px-4 sm:px-6 lg:px-8 text-xs text-content-muted dark:text-slate-400 transition-colors">
         <div className="max-w-7xl mx-auto flex items-center gap-2">
           <Link to="/" className="hover:text-navy-800 dark:hover:text-gold-400 transition-colors">
-            Home
+            {t('nav.home')}
           </Link>
-          <ChevronRight className="w-3.5 h-3.5 text-slate-400 dark:text-slate-600" />
+          <ChevronRight className={`w-3.5 h-3.5 text-slate-400 dark:text-slate-600 ${isRTL ? 'rotate-180' : ''}`} />
           <Link to="/products" className="hover:text-navy-800 dark:hover:text-gold-400 transition-colors">
-            Products
+            {t('nav.products')}
           </Link>
-          <ChevronRight className="w-3.5 h-3.5 text-slate-400 dark:text-slate-600" />
+          <ChevronRight className={`w-3.5 h-3.5 text-slate-400 dark:text-slate-600 ${isRTL ? 'rotate-180' : ''}`} />
           <span className="text-navy-800 dark:text-gold-400 font-semibold">{product.name}</span>
         </div>
       </div>
@@ -86,7 +84,7 @@ export const ProductDetail = () => {
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold bg-gold-500 text-navy-900 hover:bg-gold-400 active:bg-gold-600 shadow-premium transition-all"
               >
                 <FileText className="w-4 h-4 text-navy-950" />
-                <span>Request a Quote for {product.name}</span>
+                <span>{t('productDetail.requestQuoteBtn')}</span>
               </button>
 
               <a
@@ -96,7 +94,7 @@ export const ProductDetail = () => {
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold bg-navy-800 hover:bg-navy-700 text-emerald-400 border border-slate-700 transition-colors"
               >
                 <MessageSquare className="w-4 h-4" />
-                <span>Quick WhatsApp Inquiry</span>
+                <span>{t('productDetail.whatsAppBtn')}</span>
               </a>
             </div>
           </div>
@@ -146,20 +144,19 @@ export const ProductDetail = () => {
             <div className="p-6 rounded-2xl bg-surface-light dark:bg-[#0A1B2A] border border-surface-border dark:border-navy-800 space-y-4">
               <div className="flex items-center gap-2 text-xs font-bold text-navy-800 dark:text-gold-400 uppercase tracking-wider">
                 <ShieldCheck className="w-4 h-4 text-gold-600 dark:text-gold-400" />
-                <span>Commercial Trading Desk</span>
+                <span>{t('footer.colContact')}</span>
               </div>
               <p className="text-xs text-content-muted dark:text-slate-400 leading-relaxed">
-                For CIF/FOB pricing, minimum container loads, chemical purity assays, and shipment scheduling from Abu Dhabi, 
-                please submit your request directly to our trading managers.
+                {t('productDetail.specsP2')}
               </p>
               <div className="pt-2 text-xs text-navy-800 dark:text-slate-200 space-y-2 border-t border-surface-border/60 dark:border-navy-800">
                 <p className="flex items-center justify-between">
-                  <span className="text-slate-500">Trading Hub:</span>
-                  <span className="font-semibold">Abu Dhabi, UAE</span>
+                  <span className="text-slate-500">{t('footer.colCompany')}:</span>
+                  <span className="font-semibold">{t('footer.locationShort')}</span>
                 </p>
                 <p className="flex items-center justify-between">
-                  <span className="text-slate-500">Contract Types:</span>
-                  <span className="font-semibold">Commercial Supply & Spot</span>
+                  <span className="text-slate-500">{t('footer.nature')}:</span>
+                  <span className="font-semibold">B2B Commercial</span>
                 </p>
               </div>
             </div>
@@ -170,10 +167,10 @@ export const ProductDetail = () => {
             {/* 3 & 4. Product Introduction & Overview */}
             <div>
               <span className="text-xs font-bold text-gold-600 dark:text-gold-400 uppercase tracking-widest block mb-2">
-                Commodity Overview
+                {t('productDetail.overviewBadge')}
               </span>
               <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-navy-800 dark:text-white">
-                About {product.name}
+                {product.name}
               </h2>
               <p className="mt-4 text-content-main dark:text-slate-300 text-base leading-relaxed">
                 {product.overview}
@@ -186,75 +183,75 @@ export const ProductDetail = () => {
                 <Info className="w-5 h-5 text-gold-600 dark:text-gold-400 shrink-0 mt-0.5" />
                 <div>
                   <h3 className="font-heading text-sm font-bold text-navy-800 dark:text-white">
-                    Product Specifications & Technical Parameters
+                    {t('productDetail.specificationsTitle')}
                   </h3>
                   <p className="mt-2 text-xs text-content-muted dark:text-slate-400 leading-relaxed">
-                    {product.specificationsNote}
+                    {t('productDetail.specsP1')}
                   </p>
                   <p className="mt-2 text-xs text-content-muted dark:text-slate-400">
-                    To receive a tailored Certificate of Analysis (CoA) or technical data sheet corresponding 
-                    to current lot availability, please submit your target parameters below.
+                    {t('productDetail.specsP2')}
                   </p>
                 </div>
               </div>
             </div>
 
             {/* 6. Applications and Uses */}
-            <div>
-              <span className="text-xs font-bold text-gold-600 dark:text-gold-400 uppercase tracking-widest block mb-2">
-                Commercial Utility
-              </span>
-              <h2 className="font-heading text-2xl font-extrabold text-navy-800 dark:text-white mb-6">
-                Commercial Applications & Industrial Uses
-              </h2>
-              <div className="space-y-4">
-                {product.applications.map((app, idx) => (
-                  <div
-                    key={app.title}
-                    className="p-5 rounded-xl bg-white dark:bg-navy-900 border border-surface-border dark:border-navy-700/80 shadow-subtle hover:border-gold-500/40 dark:hover:border-gold-500/50 transition-colors"
-                  >
-                    <div className="flex items-start gap-3.5">
-                      <div className="w-7 h-7 rounded-full bg-navy-50 dark:bg-navy-800 text-gold-600 dark:text-gold-400 flex items-center justify-center shrink-0 font-bold text-xs mt-0.5">
-                        {idx + 1}
-                      </div>
-                      <div>
-                        <h4 className="font-heading text-base font-bold text-navy-800 dark:text-white">
-                          {app.title}
-                        </h4>
-                        <p className="text-content-muted dark:text-slate-400 text-sm mt-1.5 leading-relaxed">
-                          {app.description}
-                        </p>
+            {product.applications && product.applications.length > 0 && (
+              <div>
+                <span className="text-xs font-bold text-gold-600 dark:text-gold-400 uppercase tracking-widest block mb-2">
+                  {t('productDetail.overviewBadge')}
+                </span>
+                <h2 className="font-heading text-2xl font-extrabold text-navy-800 dark:text-white mb-6">
+                  {t('productDetail.applicationsTitle')}
+                </h2>
+                <div className="space-y-4">
+                  {product.applications.map((app, idx) => (
+                    <div
+                      key={idx}
+                      className="p-5 rounded-xl bg-white dark:bg-navy-900 border border-surface-border dark:border-navy-700/80 shadow-subtle hover:border-gold-500/40 dark:hover:border-gold-500/50 transition-colors"
+                    >
+                      <div className="flex items-start gap-3.5">
+                        <div className="w-7 h-7 rounded-full bg-navy-50 dark:bg-navy-800 text-gold-600 dark:text-gold-400 flex items-center justify-center shrink-0 font-bold text-xs mt-0.5">
+                          {idx + 1}
+                        </div>
+                        <div>
+                          <h4 className="font-heading text-base font-bold text-navy-800 dark:text-white">
+                            {app.title}
+                          </h4>
+                          <p className="text-content-muted dark:text-slate-400 text-sm mt-1.5 leading-relaxed">
+                            {app.description}
+                          </p>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
             {/* 8. Request a Quote CTA Box */}
             <div className="p-8 rounded-2xl bg-navy-900 text-white border border-navy-800 space-y-4">
               <span className="text-gold-400 text-xs font-semibold uppercase tracking-wider block">
-                Direct Procurement
+                {t('productDetail.inquireTitle')}
               </span>
               <h3 className="font-heading text-2xl font-bold">
-                Inquire Regarding {product.name} Supply
+                {product.name}
               </h3>
               <p className="text-slate-300 text-sm leading-relaxed">
-                Connect with our commercial desk in Abu Dhabi to review current supply availability, 
-                delivery schedules, and competitive commercial quotation terms.
+                {t('productDetail.inquireDesc')}
               </p>
               <div className="pt-2 flex flex-wrap gap-4">
                 <button
                   onClick={() => openQuoteModal(product.name)}
                   className="px-6 py-3 rounded-xl text-sm font-semibold bg-gold-500 text-navy-900 hover:bg-gold-400 transition-colors shadow-subtle"
                 >
-                  Submit Quote Request
+                  {t('productDetail.requestQuoteBtn')}
                 </button>
                 <Link
                   to="/contact"
                   className="px-6 py-3 rounded-xl text-sm font-semibold bg-navy-800 hover:bg-navy-700 text-white border border-slate-700 transition-colors"
                 >
-                  General Contact
+                  {t('cta.buttonContact')}
                 </Link>
               </div>
             </div>
@@ -266,18 +263,18 @@ export const ProductDetail = () => {
           <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
             <div>
               <span className="text-xs font-bold text-gold-600 dark:text-gold-400 uppercase tracking-widest block mb-2">
-                Trading Portfolio
+                {t('productsPage.heroBadge')}
               </span>
               <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-navy-800 dark:text-white">
-                Related Trading Categories
+                {t('productDetail.relatedTitle')}
               </h2>
             </div>
             <Link
               to="/products"
               className="text-sm font-semibold text-gold-600 dark:text-gold-400 hover:text-gold-700 dark:hover:text-gold-300 inline-flex items-center gap-1"
             >
-              <span>View All 5 Categories</span>
-              <ArrowRight className="w-4 h-4" />
+              <span>{t('productGrid.viewAll')}</span>
+              <ArrowRight className={`w-4 h-4 ${isRTL ? 'rotate-180' : ''}`} />
             </Link>
           </div>
 
@@ -299,7 +296,7 @@ export const ProductDetail = () => {
                   </div>
                   <div className="p-6">
                     <span className="text-[11px] font-semibold text-gold-600 dark:text-gold-400 uppercase tracking-wider block mb-1">
-                      {rel.category.split('&')[0]}
+                      {rel.category?.split('&')[0]}
                     </span>
                     <h4 className="font-heading text-lg font-bold text-navy-800 dark:text-white group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors">
                       {rel.name}
@@ -310,8 +307,8 @@ export const ProductDetail = () => {
                   </div>
                 </div>
                 <div className="px-6 pb-6 pt-2 text-xs font-semibold text-navy-800 dark:text-slate-200 group-hover:text-gold-600 dark:group-hover:text-gold-400 flex items-center gap-1">
-                  <span>Explore Product</span>
-                  <ArrowRight className="w-3.5 h-3.5 text-gold-500 group-hover:translate-x-1 transition-transform" />
+                  <span>{t('productGrid.explore')}</span>
+                  <ArrowRight className={`w-3.5 h-3.5 text-gold-500 transition-transform ${isRTL ? 'group-hover:-translate-x-1 rotate-180' : 'group-hover:translate-x-1'}`} />
                 </div>
               </Link>
             ))}

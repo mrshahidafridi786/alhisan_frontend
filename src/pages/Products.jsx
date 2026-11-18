@@ -2,12 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { Link, useOutletContext } from 'react-router-dom';
 import { ArrowRight, FileText, CheckCircle2 } from 'lucide-react';
 import { SEO } from '../components/common/SEO';
-import { productsData } from '../data/productsData';
+import { useLanguage } from '../context/LanguageContext';
 import { API_BASE_URL } from '../utils/api';
 
 export const Products = () => {
   const { openQuoteModal } = useOutletContext();
-  const [items, setItems] = useState(productsData);
+  const { t, products, isRTL } = useLanguage();
+  const [items, setItems] = useState(products);
+
+  useEffect(() => {
+    setItems(products);
+  }, [products]);
 
   useEffect(() => {
     const fetchLiveProducts = async () => {
@@ -16,16 +21,15 @@ export const Products = () => {
         if (res.ok) {
           const json = await res.json();
           if (json.success && json.data?.length) {
-            // Merge with local rich descriptions if matching slug
             const merged = json.data.map((item, idx) => {
-              const localMatch = productsData.find((p) => p.slug === item.slug);
+              const localMatch = products.find((p) => p.slug === item.slug);
               return {
                 id: item.slug || `prod-${idx}`,
                 slug: item.slug,
-                name: item.name,
-                category: item.category,
-                shortDescription: item.shortDescription || localMatch?.shortDescription,
-                overview: item.shortDescription || localMatch?.overview,
+                name: localMatch?.name || item.name,
+                category: localMatch?.category || item.category,
+                shortDescription: localMatch?.shortDescription || item.shortDescription,
+                overview: localMatch?.overview || item.shortDescription,
                 imageUrl: item.imageUrl || localMatch?.imageUrl || '/assets/logo.jpg',
                 applications: localMatch?.applications || [
                   { title: 'Commercial Supply', description: 'Wholesale B2B trade fulfillment' },
@@ -36,12 +40,10 @@ export const Products = () => {
             setItems(merged);
           }
         }
-      } catch (e) {
-        // Fallback gracefully to productsData
-      }
+      } catch (e) {}
     };
     fetchLiveProducts();
-  }, []);
+  }, [products]);
 
   return (
     <div className="bg-surface-warm dark:bg-[#071524] transition-colors duration-300">
@@ -66,14 +68,13 @@ export const Products = () => {
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 text-xs font-bold text-gold-400 uppercase tracking-widest mb-4">
               <span className="w-6 h-[1.5px] bg-gold-400"></span>
-              <span>International Commodity Portfolios</span>
+              <span>{t('productsPage.heroBadge')}</span>
             </div>
             <h1 className="font-heading text-4xl sm:text-5xl font-extrabold tracking-tight text-white">
-              Our Product Categories
+              {t('productsPage.heroTitle')}
             </h1>
             <p className="mt-4 text-lg text-slate-300 leading-relaxed">
-              Explore our core trading categories spanning foundational industrial minerals, 
-              essential chemical raw materials, agricultural food commodities, and culinary spices.
+              {t('productsPage.heroSubtitle')}
             </p>
           </div>
         </div>
@@ -107,7 +108,7 @@ export const Products = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-navy-950/60 via-transparent to-transparent"></div>
                     <div className="absolute top-4 left-4">
                       <span className="px-3 py-1 rounded-lg bg-navy-900/80 backdrop-blur-md text-gold-400 text-xs font-semibold uppercase tracking-wider border border-navy-700/60">
-                        Category {idx + 1} of {items.length}
+                        {product.category?.split('&')[0]}
                       </span>
                     </div>
                   </div>
@@ -130,19 +131,21 @@ export const Products = () => {
                       </p>
 
                       {/* Key Commercial Applications Highlights */}
-                      <div className="mt-6 pt-6 border-t border-surface-border/60 dark:border-navy-800">
-                        <h3 className="text-xs font-bold uppercase tracking-wider text-navy-800 dark:text-white mb-3">
-                          Typical Commercial Applications:
-                        </h3>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-content-muted dark:text-slate-400">
-                          {product.applications.slice(0, 4).map((app) => (
-                            <div key={app.title} className="flex items-start gap-2">
-                              <CheckCircle2 className="w-3.5 h-3.5 text-gold-500 shrink-0 mt-0.5" />
-                              <span className="font-medium text-slate-700 dark:text-slate-300">{app.title}</span>
-                            </div>
-                          ))}
+                      {product.applications && product.applications.length > 0 && (
+                        <div className="mt-6 pt-6 border-t border-surface-border/60 dark:border-navy-800">
+                          <h3 className="text-xs font-bold uppercase tracking-wider text-navy-800 dark:text-white mb-3">
+                            {t('productDetail.applicationsTitle')}
+                          </h3>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-content-muted dark:text-slate-400">
+                            {product.applications.slice(0, 4).map((app, appIdx) => (
+                              <div key={appIdx} className="flex items-start gap-2">
+                                <CheckCircle2 className="w-3.5 h-3.5 text-gold-500 shrink-0 mt-0.5" />
+                                <span className="font-medium text-slate-700 dark:text-slate-300">{app.title}</span>
+                              </div>
+                            ))}
+                          </div>
                         </div>
-                      </div>
+                      )}
                     </div>
 
                     {/* Actions */}
@@ -151,8 +154,8 @@ export const Products = () => {
                         to={`/products/${product.slug}`}
                         className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold bg-navy-800 dark:bg-navy-700 text-white hover:bg-navy-700 dark:hover:bg-navy-600 shadow-subtle transition-colors"
                       >
-                        <span>Explore Details & Applications</span>
-                        <ArrowRight className="w-4 h-4 text-gold-400" />
+                        <span>{t('productGrid.explore')}</span>
+                        <ArrowRight className={`w-4 h-4 text-gold-400 ${isRTL ? 'rotate-180' : ''}`} />
                       </Link>
 
                       <button
@@ -160,7 +163,7 @@ export const Products = () => {
                         className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold bg-white dark:bg-navy-800 text-navy-800 dark:text-slate-200 border border-surface-border dark:border-navy-700 hover:border-gold-500 hover:text-gold-600 dark:hover:text-gold-400 transition-colors"
                       >
                         <FileText className="w-4 h-4 text-gold-500" />
-                        <span>Request Quote for {product.name}</span>
+                        <span>{t('cta.buttonContact')} ({product.name})</span>
                       </button>
                     </div>
                   </div>
@@ -175,21 +178,20 @@ export const Products = () => {
       <section className="py-20 bg-surface-light dark:bg-[#0A1B2A] border-t border-surface-border dark:border-navy-800 transition-colors duration-300">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
           <span className="text-xs font-bold text-gold-600 dark:text-gold-400 uppercase tracking-widest block">
-            Procurement & Commercial Terms
+            {t('cta.badge')}
           </span>
           <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-navy-800 dark:text-white">
-            Need Detailed Specifications or Sourcing Terms?
+            {t('productsPage.ctaTitle')}
           </h2>
           <p className="text-content-muted dark:text-slate-400 text-base leading-relaxed">
-            Because trade volumes, packaging formats, and delivery terms vary by market, 
-            our trading desk prepares formal quotations tailored specifically to your enterprise requirements.
+            {t('productsPage.ctaSubtitle')}
           </p>
           <div className="pt-2">
             <button
               onClick={() => openQuoteModal()}
               className="px-8 py-3.5 rounded-xl text-sm font-semibold bg-navy-800 dark:bg-navy-700 text-white hover:bg-navy-700 dark:hover:bg-navy-600 border border-gold-500/40 shadow-premium transition-all"
             >
-              Request a Custom Commercial Quotation
+              {t('productsPage.ctaButton')}
             </button>
           </div>
         </div>

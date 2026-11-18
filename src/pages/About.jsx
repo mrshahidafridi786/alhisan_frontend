@@ -1,22 +1,17 @@
 import React from 'react';
 import { Link, useOutletContext } from 'react-router-dom';
 import { 
-  Building2, 
   Target, 
   Compass, 
-  ShieldCheck, 
-  Globe2, 
-  Layers, 
   ArrowRight, 
   CheckCircle2,
-  Users
 } from 'lucide-react';
 import { SEO } from '../components/common/SEO';
-import { productsData } from '../data/productsData';
-import { leadershipData } from '../data/leadershipData';
+import { useLanguage } from '../context/LanguageContext';
 
 export const About = () => {
   const { openQuoteModal } = useOutletContext();
+  const { t, products, leadership, isRTL } = useLanguage();
 
   return (
     <div className="bg-surface-warm dark:bg-[#071524] transition-colors duration-300">
@@ -41,14 +36,13 @@ export const About = () => {
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 text-xs font-bold text-gold-400 uppercase tracking-widest mb-4">
               <span className="w-6 h-[1.5px] bg-gold-400"></span>
-              <span>Abu Dhabi, United Arab Emirates</span>
+              <span>{t('aboutPage.heroBadge')}</span>
             </div>
             <h1 className="font-heading text-4xl sm:text-5xl font-extrabold tracking-tight text-white">
-              About Alhisan
+              {t('aboutPage.heroTitle')}
             </h1>
             <p className="mt-4 text-lg text-slate-300 leading-relaxed">
-              An international trading company dedicated to reliable commodity distribution, 
-              disciplined execution, and transparent commercial partnerships.
+              {t('aboutPage.heroSubtitle')}
             </p>
           </div>
         </div>
@@ -61,39 +55,29 @@ export const About = () => {
             <div className="lg:col-span-6 space-y-6">
               <div className="space-y-2">
                 <span className="text-xs font-bold text-gold-600 dark:text-gold-400 uppercase tracking-widest block">
-                  Corporate Identity
+                  {t('aboutPage.storyBadge')}
                 </span>
                 <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-navy-800 dark:text-white tracking-tight">
-                  Our Business Overview
+                  {t('aboutPage.storyTitle')}
                 </h2>
               </div>
               <p className="text-content-main dark:text-slate-200 text-base leading-relaxed">
-                Operating from Abu Dhabi, United Arab Emirates, <strong>Alhisan General Trading Company</strong> conducts international trading 
-                operations centered around essential industrial minerals, chemical commodities, agricultural food products, 
-                and culinary spices.
+                {t('aboutPage.storyP1')}
               </p>
               <p className="text-content-muted dark:text-slate-400 text-sm sm:text-base leading-relaxed">
-                As a focused trading enterprise, Alhisan acts as a strategic intermediary and trade facilitator. 
-                We connect dependable suppliers with commercial buyers who demand transparent transactions, 
-                consistent communication, and reliable fulfillment schedules.
+                {t('aboutPage.storyP2')}
               </p>
               <div className="p-5 rounded-xl bg-surface-light dark:bg-navy-900 border border-surface-border dark:border-navy-700/80 text-sm space-y-3">
                 <div className="flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-gold-600 dark:text-gold-400 shrink-0 mt-0.5" />
                   <p className="text-navy-800 dark:text-slate-200">
-                    <strong>Jurisdiction of Operation:</strong> Abu Dhabi, United Arab Emirates.
+                    <strong>{t('footer.jurisdiction')}</strong>
                   </p>
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-gold-600 dark:text-gold-400 shrink-0 mt-0.5" />
                   <p className="text-navy-800 dark:text-slate-200">
-                    <strong>Business Classification:</strong> International General Trading & Commodity Distribution.
-                  </p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-gold-600 dark:text-gold-400 shrink-0 mt-0.5" />
-                  <p className="text-navy-800 dark:text-slate-200">
-                    <strong>Operating Philosophy:</strong> Transparent contractual relationships, rigorous quality alignment, and long-term commercial trust.
+                    <strong>{t('footer.nature')}</strong>
                   </p>
                 </div>
               </div>
@@ -125,16 +109,15 @@ export const About = () => {
                   <Compass className="w-6 h-6" />
                 </div>
                 <h3 className="font-heading text-2xl font-bold text-navy-800 dark:text-white mb-4">
-                  Our Vision
+                  {t('aboutPage.visionTitle')}
                 </h3>
                 <p className="text-content-main dark:text-slate-300 text-base leading-relaxed">
-                  To be recognized as a highly respected, trustworthy international general trading company operating from the UAE, 
-                  known across global commercial markets for integrity, dependability, and professional excellence in commodity supply.
+                  {t('aboutPage.visionDesc')}
                 </p>
               </div>
               <div className="pt-6 mt-6 border-t border-surface-border/60 dark:border-navy-800">
                 <span className="text-xs font-semibold text-gold-600 dark:text-gold-400 uppercase tracking-widest">
-                  Strategic Horizon
+                  AL HISAN AL ASWA
                 </span>
               </div>
             </div>
@@ -146,16 +129,15 @@ export const About = () => {
                   <Target className="w-6 h-6" />
                 </div>
                 <h3 className="font-heading text-2xl font-bold text-navy-800 dark:text-white mb-4">
-                  Our Mission
+                  {t('aboutPage.missionTitle')}
                 </h3>
                 <p className="text-content-main dark:text-slate-300 text-base leading-relaxed">
-                  To provide seamless, reliable trading solutions by bridging global commodity producers and commercial buyers, 
-                  upholding rigorous standards of business ethics, transparent communication, and consistent trade execution.
+                  {t('aboutPage.missionDesc')}
                 </p>
               </div>
               <div className="pt-6 mt-6 border-t border-surface-border/60 dark:border-navy-800">
                 <span className="text-xs font-semibold text-gold-600 dark:text-gold-400 uppercase tracking-widest">
-                  Daily Execution Commitment
+                  ABU DHABI • UAE
                 </span>
               </div>
             </div>
@@ -165,43 +147,43 @@ export const About = () => {
           <div className="mt-16 pt-12 border-t border-surface-border dark:border-navy-800">
             <div className="max-w-2xl mb-12">
               <span className="text-xs font-bold text-gold-600 dark:text-gold-400 uppercase tracking-widest block mb-2">
-                Ethical Grounding
+                {t('aboutPage.valuesBadge')}
               </span>
               <h3 className="font-heading text-3xl font-extrabold text-navy-800 dark:text-white">
-                Our Business Values
+                {t('aboutPage.valuesTitle')}
               </h3>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               <div className="p-6 rounded-xl bg-white dark:bg-navy-900 border border-surface-border dark:border-navy-700/80 shadow-subtle">
                 <div className="text-gold-600 dark:text-gold-400 font-heading font-black text-2xl mb-2">01</div>
-                <h4 className="font-heading text-base font-bold text-navy-800 dark:text-white mb-2">Integrity & Clarity</h4>
+                <h4 className="font-heading text-base font-bold text-navy-800 dark:text-white mb-2">{t('aboutPage.v1Title')}</h4>
                 <p className="text-content-muted dark:text-slate-400 text-xs leading-relaxed">
-                  Transparent dealings with clear contracts, honest status updates, and truthful specifications.
+                  {t('aboutPage.v1Desc')}
                 </p>
               </div>
 
               <div className="p-6 rounded-xl bg-white dark:bg-navy-900 border border-surface-border dark:border-navy-700/80 shadow-subtle">
                 <div className="text-gold-600 dark:text-gold-400 font-heading font-black text-2xl mb-2">02</div>
-                <h4 className="font-heading text-base font-bold text-navy-800 dark:text-white mb-2">Reliable Supply</h4>
+                <h4 className="font-heading text-base font-bold text-navy-800 dark:text-white mb-2">{t('aboutPage.v2Title')}</h4>
                 <p className="text-content-muted dark:text-slate-400 text-xs leading-relaxed">
-                  Disciplined execution dedicated to preserving supply chain continuity for commercial clients.
+                  {t('aboutPage.v2Desc')}
                 </p>
               </div>
 
               <div className="p-6 rounded-xl bg-white dark:bg-navy-900 border border-surface-border dark:border-navy-700/80 shadow-subtle">
                 <div className="text-gold-600 dark:text-gold-400 font-heading font-black text-2xl mb-2">03</div>
-                <h4 className="font-heading text-base font-bold text-navy-800 dark:text-white mb-2">Long-Term Focus</h4>
+                <h4 className="font-heading text-base font-bold text-navy-800 dark:text-white mb-2">{t('aboutPage.v3Title')}</h4>
                 <p className="text-content-muted dark:text-slate-400 text-xs leading-relaxed">
-                  Cultivating enduring business partnerships that deliver mutual value over decades.
+                  {t('aboutPage.v3Desc')}
                 </p>
               </div>
 
               <div className="p-6 rounded-xl bg-white dark:bg-navy-900 border border-surface-border dark:border-navy-700/80 shadow-subtle">
                 <div className="text-gold-600 dark:text-gold-400 font-heading font-black text-2xl mb-2">04</div>
-                <h4 className="font-heading text-base font-bold text-navy-800 dark:text-white mb-2">Professionalism</h4>
+                <h4 className="font-heading text-base font-bold text-navy-800 dark:text-white mb-2">{t('aboutPage.v4Title')}</h4>
                 <p className="text-content-muted dark:text-slate-400 text-xs leading-relaxed">
-                  Rigorous attention to detail, respectful communication, and prompt responses from Abu Dhabi.
+                  {t('aboutPage.v4Desc')}
                 </p>
               </div>
             </div>
@@ -215,23 +197,23 @@ export const About = () => {
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
             <div>
               <span className="text-xs font-bold text-gold-600 dark:text-gold-400 uppercase tracking-widest block mb-2">
-                Product Portfolios
+                {t('productGrid.badge')}
               </span>
               <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-navy-800 dark:text-white">
-                Our Trading Categories
+                {t('footer.colCategories')}
               </h2>
             </div>
             <Link
               to="/products"
               className="inline-flex items-center gap-1.5 text-sm font-semibold text-gold-600 dark:text-gold-400 hover:text-gold-700 dark:hover:text-gold-300"
             >
-              <span>Explore All 5 Categories</span>
-              <ArrowRight className="w-4 h-4" />
+              <span>{t('productGrid.viewAll')}</span>
+              <ArrowRight className={`w-4 h-4 ${isRTL ? 'rotate-180' : ''}`} />
             </Link>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-            {productsData.map((item) => (
+            {products.map((item) => (
               <Link
                 key={item.id}
                 to={`/products/${item.slug}`}
@@ -254,8 +236,8 @@ export const About = () => {
                   </p>
                 </div>
                 <div className="mt-4 pt-3 border-t border-surface-border/60 dark:border-navy-800 text-xs font-semibold text-navy-800 dark:text-slate-200 group-hover:text-gold-600 dark:group-hover:text-gold-400 flex items-center gap-1">
-                  <span>View Details</span>
-                  <ArrowRight className="w-3.5 h-3.5 text-gold-500" />
+                  <span>{t('productGrid.explore')}</span>
+                  <ArrowRight className={`w-3.5 h-3.5 text-gold-500 ${isRTL ? 'rotate-180' : ''}`} />
                 </div>
               </Link>
             ))}
@@ -268,18 +250,18 @@ export const About = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <span className="text-xs font-bold text-gold-600 dark:text-gold-400 uppercase tracking-widest block mb-2">
-              Corporate Governance
+              {t('leadershipSection.badge')}
             </span>
             <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-navy-800 dark:text-white">
-              Executive Leadership
+              {t('leadershipSection.title')}
             </h2>
             <p className="mt-3 text-content-muted dark:text-slate-400 text-sm sm:text-base">
-              The executive management guiding Alhisan’s strategic international trading operations.
+              {t('leadershipSection.subtitle')}
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {leadershipData.map((member) => (
+            {leadership.map((member) => (
               <div
                 key={member.id}
                 className="p-8 rounded-xl bg-white dark:bg-navy-900 border border-surface-border dark:border-navy-700/80 shadow-subtle text-center flex flex-col items-center"
@@ -288,16 +270,16 @@ export const About = () => {
                   {member.portrait ? (
                     <img
                       src={member.portrait}
-                      alt={member.portraitPlaceholder.alt}
+                      alt={member.portraitPlaceholder?.alt || member.name}
                       className="w-full h-full object-cover object-top"
                     />
                   ) : (
                     <div className="w-full h-full flex flex-col items-center justify-center text-gold-400">
                       <span className="font-heading text-2xl font-bold">
-                        {member.portraitPlaceholder.initials}
+                        {member.portraitPlaceholder?.initials || 'EXE'}
                       </span>
                       <span className="text-[8px] uppercase tracking-widest text-slate-300">
-                        Executive
+                        {t('leadershipSection.executiveTag')}
                       </span>
                     </div>
                   )}
@@ -312,7 +294,7 @@ export const About = () => {
                   {member.bioPlaceholder}
                 </p>
                 <div className="mt-4 pt-3 border-t border-surface-border/60 dark:border-navy-800 text-[11px] text-slate-400 dark:text-slate-500 w-full text-center">
-                  <span>Alhisan General Trading Company • Abu Dhabi</span>
+                  <span>{t('leadershipSection.companyLocation')}</span>
                 </div>
               </div>
             ))}
@@ -323,8 +305,8 @@ export const About = () => {
               to="/leadership"
               className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold text-navy-800 dark:text-gold-400 bg-white dark:bg-navy-800 border border-surface-border dark:border-navy-700 hover:border-gold-500 shadow-subtle transition-colors"
             >
-              <span>Read Full Leadership Page</span>
-              <ArrowRight className="w-4 h-4 text-gold-500" />
+              <span>{t('leadershipSection.viewProfiles')}</span>
+              <ArrowRight className={`w-4 h-4 text-gold-500 ${isRTL ? 'rotate-180' : ''}`} />
             </Link>
           </div>
         </div>
@@ -334,26 +316,26 @@ export const About = () => {
       <section className="py-20 bg-navy-900 text-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
           <span className="text-xs font-bold text-gold-400 uppercase tracking-widest block">
-            Direct Trade Engagement
+            {t('cta.badge')}
           </span>
           <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-white">
-            Connect With Our Trading Desk in Abu Dhabi
+            {t('cta.title')}
           </h2>
           <p className="text-slate-300 text-base max-w-2xl mx-auto leading-relaxed">
-            Discuss product availability, supply terms, and partnership opportunities directly with our team.
+            {t('cta.subtitle')}
           </p>
           <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               to="/contact"
               className="w-full sm:w-auto px-8 py-3.5 rounded-xl text-sm font-semibold bg-gold-500 text-navy-900 hover:bg-gold-400 shadow-premium transition-colors"
             >
-              Contact Our Office
+              {t('cta.buttonContact')}
             </Link>
             <button
               onClick={() => openQuoteModal()}
               className="w-full sm:w-auto px-8 py-3.5 rounded-xl text-sm font-semibold bg-navy-800 hover:bg-navy-700 text-white border border-slate-700 transition-colors"
             >
-              Request a Commercial Quote
+              {t('quoteModal.title')}
             </button>
           </div>
         </div>

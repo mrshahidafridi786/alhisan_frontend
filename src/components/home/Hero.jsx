@@ -1,9 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ChevronRight, ShieldCheck, Globe, Anchor } from 'lucide-react';
+import { useLanguage } from '../../context/LanguageContext';
 import { siteConfig } from '../../data/siteConfig';
 
 export const Hero = ({ onOpenQuote }) => {
+  const { t, isRTL } = useLanguage();
+
   return (
     <section className="relative min-h-[88vh] flex items-center justify-center overflow-hidden bg-navy-900 text-white">
       {/* Background Photography with Sophisticated Multi-Layer Overlay */}
@@ -39,21 +42,20 @@ export const Hero = ({ onOpenQuote }) => {
               alt="Al Hisan Logo"
               className="w-6 h-6 rounded-full border border-gold-400/60 object-cover"
             />
-            <span>Abu Dhabi, United Arab Emirates • International Trading</span>
+            <span>{t('hero.badge', 'Abu Dhabi, United Arab Emirates • International Trading')}</span>
           </div>
 
           {/* Master Headline */}
           <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.15] text-white">
-            Connecting Global Markets Through{' '}
+            {t('hero.title', 'Connecting Global Markets Through')}{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 via-gold-300 to-amber-200">
-              Trusted Trading
+              {t('hero.highlight', 'Trusted Trading')}
             </span>
           </h1>
 
           {/* Supporting Text */}
           <p className="mt-6 text-lg sm:text-xl text-slate-300 font-normal leading-relaxed max-w-2xl">
-            Alhisan is committed to building reliable business relationships through the trading of essential 
-            industrial, food, and commodity products.
+            {t('hero.description', 'Facilitating reliable international trade in essential industrial commodities, high-grade minerals, and agricultural foodstuffs with transparent execution.')}
           </p>
 
           {/* Action CTAs */}
@@ -62,17 +64,18 @@ export const Hero = ({ onOpenQuote }) => {
               to="/products"
               className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-md text-sm font-semibold tracking-wide bg-gold-500 text-navy-900 hover:bg-gold-400 active:bg-gold-600 shadow-premium hover:shadow-gold-glow transition-all duration-300 transform hover:-translate-y-0.5"
             >
-              <span>Explore Our Products</span>
-              <ArrowRight className="w-4 h-4 text-navy-950" />
+              <span>{t('hero.exploreProducts', 'Explore Trade Catalog')}</span>
+              <ArrowRight className={`w-4 h-4 text-navy-950 ${isRTL ? 'rotate-180' : ''}`} />
             </Link>
 
-            <Link
-              to="/contact"
+            <button
+              onClick={onOpenQuote}
+              type="button"
               className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-md text-sm font-semibold tracking-wide bg-navy-800/80 hover:bg-navy-800 text-white border border-slate-700/80 hover:border-gold-500/50 backdrop-blur-sm transition-all duration-300"
             >
-              <span>Contact Our Team</span>
-              <ChevronRight className="w-4 h-4 text-gold-400" />
-            </Link>
+              <span>{t('hero.inquireNow', 'Request Quotation')}</span>
+              <ChevronRight className={`w-4 h-4 text-gold-400 ${isRTL ? 'rotate-180' : ''}`} />
+            </button>
           </div>
 
           {/* Value Anchor Highlights */}
@@ -82,8 +85,8 @@ export const Hero = ({ onOpenQuote }) => {
                 <Globe className="w-4 h-4" />
               </div>
               <div>
-                <p className="font-semibold text-white">Global Reach</p>
-                <p className="text-slate-400 text-xs">Cross-border commodity flow</p>
+                <p className="font-semibold text-white">{t('hero.stat1Label', 'Trade Reliability')}</p>
+                <p className="text-slate-400 text-xs">{t('hero.stat1Value', '100%')} Verified</p>
               </div>
             </div>
 
@@ -92,7 +95,7 @@ export const Hero = ({ onOpenQuote }) => {
                 <ShieldCheck className="w-4 h-4" />
               </div>
               <div>
-                <p className="font-semibold text-white">Commercial Trust</p>
+                <p className="font-semibold text-white">{t('whyUs.card2Title', 'Commercial Trust')}</p>
                 <p className="text-slate-400 text-xs">Disciplined trade execution</p>
               </div>
             </div>
@@ -102,7 +105,7 @@ export const Hero = ({ onOpenQuote }) => {
                 <Anchor className="w-4 h-4" />
               </div>
               <div>
-                <p className="font-semibold text-white">Strategic UAE Hub</p>
+                <p className="font-semibold text-white">{t('whyUs.card1Title', 'UAE Strategic Hub')}</p>
                 <p className="text-slate-400 text-xs">Operating from Abu Dhabi</p>
               </div>
             </div>
