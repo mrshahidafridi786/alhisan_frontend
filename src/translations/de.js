@@ -59,7 +59,10 @@ export const de = {
     title: 'Wichtige Handelsrohstoffe',
     subtitle: 'Wir steuern Großhandels-Lieferverträge für geprüfte Industriemineralien, Grundchemikalien und Agrarerzeugnisse.',
     viewDetails: 'Spezifikationen Einsehen →',
+    explore: 'Produkt Erkunden',
     exploreAll: 'Vollständigen Produktkatalog Öffnen',
+    viewAll: 'Gesamten Handelskatalog Anzeigen',
+    tradingDetails: 'Handelsdetails',
   },
 
   whyUs: {
@@ -94,17 +97,28 @@ export const de = {
 
   footer: {
     desc: 'AL HISAN AL ASWA GENERAL TRADING ist ein internationales Handelsunternehmen in Abu Dhabi, VAE, das Industriemineralien, Chemikalien und Agrargüter weltweit liefert.',
-    quickLinks: 'Navigation',
-    commodities: 'Rohstoffe',
-    contactInfo: 'Kontaktbüro',
+    description: 'AL HISAN AL ASWA GENERAL TRADING ist ein internationales Handelsunternehmen in Abu Dhabi, VAE, das Industriemineralien, Chemikalien und Agrargüter weltweit liefert.',
+    quickLinks: 'Unternehmen',
+    colCompany: 'Unternehmen',
+    commodities: 'Handelskategorien',
+    colCategories: 'Handelskategorien',
+    contactInfo: 'Handelsdesk',
+    colContact: 'Handelsdesk',
     location: 'Abu Dhabi, Vereinigte Arabische Emirate',
+    jurisdiction: 'Gerichtsstand: Abu Dhabi, Vereinigte Arabische Emirate',
+    nature: 'Unternehmensgegenstand: Internationaler Warenhandel',
     phone: 'Haupttelefonnummer',
     whatsapp: 'WhatsApp Handelsdesk',
     email: 'Offizielle E-Mail',
     hours: 'Geschäftszeiten: So – Do 8:00 – 18:00 Uhr (GST)',
     rights: 'Alle Rechte vorbehalten.',
     privacy: 'Datenschutzrichtlinie',
+    privacyPolicy: 'Datenschutzrichtlinie',
     terms: 'Nutzungsbedingungen',
+    viewAllCategories: 'Alle Kategorien Anzeigen',
+    socialNotice: 'Offizielle Social-Media-Kanäle:',
+    adminPortal: 'Admin-Portal',
+    locationShort: 'Abu Dhabi, VAE',
   },
 
   quoteModal: {

@@ -59,7 +59,10 @@ export const zh = {
     title: '核心贸易大宗商品',
     subtitle: '我们为全球客户管理工业矿产、基础化工原料和基础农产品的大宗散装集装箱供应协议。',
     viewDetails: '查看产品规格 →',
+    explore: '探索产品',
     exploreAll: '查看完整产品目录',
+    viewAll: '查看完整贸易目录',
+    tradingDetails: '贸易详情',
   },
 
   whyUs: {
@@ -94,17 +97,28 @@ export const zh = {
 
   footer: {
     desc: 'AL HISAN AL ASWA GENERAL TRADING 是一家位于阿联酋阿布扎比的国际综合贸易企业，向全球工商业提供工业矿产、化学品原料与优质农产品。',
-    quickLinks: '快捷导航',
+    description: 'AL HISAN AL ASWA GENERAL TRADING 是一家位于阿联酋阿布扎比的国际综合贸易企业，向全球工商业提供工业矿产、化学品原料与优质农产品。',
+    quickLinks: '公司概况',
+    colCompany: '公司概况',
     commodities: '贸易品类',
-    contactInfo: '联系联络',
+    colCategories: '贸易品类',
+    contactInfo: '贸易代表处',
+    colContact: '贸易代表处',
     location: '阿联酋阿布扎比',
+    jurisdiction: '司法辖区：阿拉伯联合酋长国阿布扎比',
+    nature: '业务性质：国际综合贸易与大宗商品分销',
     phone: '联系总机',
     whatsapp: 'WhatsApp 贸易专线',
     email: '官方商务邮箱',
     hours: '营业时间：周日至周四 8:00 – 18:00 (海湾标准时间 GST)',
     rights: '保留所有权利。',
     privacy: '隐私政策',
+    privacyPolicy: '隐私政策',
     terms: '服务条款',
+    viewAllCategories: '查看所有品类',
+    socialNotice: '官方社交媒体渠道：',
+    adminPortal: '管理后台',
+    locationShort: '阿联酋阿布扎比',
   },
 
   quoteModal: {

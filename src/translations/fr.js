@@ -59,7 +59,10 @@ export const fr = {
     title: 'Matières Premières Essentielles',
     subtitle: 'Gestion des contrats d’approvisionnement en vrac pour les minéraux industriels, les produits chimiques de base et les denrées agroalimentaires.',
     viewDetails: 'Voir les Spécifications →',
+    explore: 'Explorer le Produit',
     exploreAll: 'Explorer Tout le Catalogue',
+    viewAll: 'Voir le Catalogue de Négoce',
+    tradingDetails: 'Détails Commerciaux',
   },
 
   whyUs: {
@@ -94,17 +97,28 @@ export const fr = {
 
   footer: {
     desc: 'AL HISAN AL ASWA GENERAL TRADING est une société de négoce international à Abou Dabi, ÉAU, approvisionnant l’industrie mondiale en minéraux, produits chimiques et denrées alimentaires.',
-    quickLinks: 'Navigation',
-    commodities: 'Matières Premières',
-    contactInfo: 'Coordonnées',
+    description: 'AL HISAN AL ASWA GENERAL TRADING est une société de négoce international à Abou Dabi, ÉAU, approvisionnant l’industrie mondiale en minéraux, produits chimiques et denrées alimentaires.',
+    quickLinks: 'Entreprise',
+    colCompany: 'Entreprise',
+    commodities: 'Catégories de Négoce',
+    colCategories: 'Catégories de Négoce',
+    contactInfo: 'Bureau Commercial',
+    colContact: 'Bureau Commercial',
     location: 'Abou Dabi, Émirats Arabes Unis',
+    jurisdiction: 'Juridiction : Abou Dabi, Émirats Arabes Unis',
+    nature: 'Activité : Négoce Général International',
     phone: 'Téléphone Principal',
     whatsapp: 'Bureau WhatsApp',
     email: 'E-mail Officiel',
     hours: 'Horaires : Dim – Jeu 8h00 – 18h00 (GST)',
     rights: 'Tous droits réservés.',
     privacy: 'Politique de Confidentialité',
+    privacyPolicy: 'Politique de Confidentialité',
     terms: 'Conditions Générales',
+    viewAllCategories: 'Voir Toutes les Catégories',
+    socialNotice: 'Réseaux Sociaux Officiels :',
+    adminPortal: 'Portail Admin',
+    locationShort: 'Abou Dabi, ÉAU',
   },
 
   quoteModal: {

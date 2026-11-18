@@ -59,7 +59,10 @@ export const en = {
     title: 'Core Trading Commodities',
     subtitle: 'We manage bulk supply arrangements across verified industrial minerals, basic chemical materials, and staple agricultural foodstuffs.',
     viewDetails: 'View Specifications →',
+    explore: 'Explore Product',
     exploreAll: 'Explore Complete Product Catalog',
+    viewAll: 'View Full Trading Catalog',
+    tradingDetails: 'Trading Details',
   },
 
   whyUs: {
@@ -94,17 +97,28 @@ export const en = {
 
   footer: {
     desc: 'AL HISAN AL ASWA GENERAL TRADING is an international commercial trading firm in Abu Dhabi, UAE, supplying industrial minerals, chemicals, and essential food commodities worldwide.',
+    description: 'AL HISAN AL ASWA GENERAL TRADING is an international commercial trading firm in Abu Dhabi, UAE, supplying industrial minerals, chemicals, and essential food commodities worldwide.',
     quickLinks: 'Navigation',
+    colCompany: 'Company',
     commodities: 'Commodities',
+    colCategories: 'Trading Categories',
     contactInfo: 'Contact Desk',
+    colContact: 'Trading Office',
     location: 'Abu Dhabi, United Arab Emirates',
+    jurisdiction: 'Jurisdiction: Abu Dhabi, United Arab Emirates',
+    nature: 'Business Nature: International General Trading',
     phone: 'Primary Phone',
     whatsapp: 'WhatsApp Desk',
     email: 'Official Email',
     hours: 'Business Hours: Sun – Thu 8:00 AM – 6:00 PM (GST)',
     rights: 'All Rights Reserved.',
     privacy: 'Privacy Policy',
+    privacyPolicy: 'Privacy Policy',
     terms: 'Terms of Service',
+    viewAllCategories: 'View All Categories',
+    socialNotice: 'Corporate Social Channels:',
+    adminPortal: 'Admin Portal',
+    locationShort: 'Abu Dhabi, UAE',
   },
 
   quoteModal: {
