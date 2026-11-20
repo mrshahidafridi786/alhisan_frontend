@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { MapPin, Phone, MessageSquare, ArrowUpRight, ShieldCheck, Mail } from 'lucide-react';
+import { MapPin, Phone, MessageSquare, ArrowUpRight, ShieldCheck, Mail, FileText } from 'lucide-react';
 import { Logo } from '../common/Logo';
 import { siteConfig } from '../../data/siteConfig';
 import { useLanguage } from '../../context/LanguageContext';
@@ -56,6 +56,18 @@ export const Footer = () => {
                 <Link to="/contact" className="text-slate-400 hover:text-gold-400 transition-colors">
                   {t('nav.contact')}
                 </Link>
+              </li>
+              <li>
+                <a
+                  href="/Alhisan_Company_Profile.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-gold-400 hover:text-gold-300 font-semibold transition-colors"
+                  title="Download Official Company Profile PDF"
+                >
+                  <FileText className="w-3.5 h-3.5" />
+                  <span>Company Profile (PDF)</span>
+                </a>
               </li>
               <li>
                 <Link to="/privacy" className="text-slate-400 hover:text-gold-400 transition-colors">
